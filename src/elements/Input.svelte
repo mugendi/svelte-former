@@ -245,10 +245,10 @@
   <!-- Radio & Checkbox -->
 {:else if type == "radio"}
   <span class="input-group">
-    {#each values as _value}
-      <input
+    {#each values as _value, i}
+     <input
         class="radio {classes.join(' ')}"
-        {id}
+        id="{id}-{i}"
         {placeholder}
         {required}
         {name}
@@ -256,7 +256,7 @@
         bind:group={value}
         type="radio"
       />
-      &nbsp; {_value}
+      &nbsp; <label for="{id}-{i}">{_value}</label>
     {/each}
   </span>
 {:else if type == "checkbox"}

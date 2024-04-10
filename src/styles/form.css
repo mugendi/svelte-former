@@ -51,7 +51,8 @@ select {
   background-position: right 0.5rem center;
 }
 
-input[type='radio'] , input[type='checkbox'] {
+input[type='radio'],
+input[type='checkbox'] {
   height: 20px;
   display: inline-block;
   width: auto;
@@ -116,9 +117,13 @@ span.input-group {
   border-radius: 5px;
 }
 
-input[type='radio'] + input[type='radio'],
-input[type='checkbox'] + input[type='checkbox'] {
-  margin-left: 20px;
+span.input-group label {
+  font-weight: normal;
+  font-size: .9em;
+}
+
+span.input-group label + input {
+  margin-left: 10px;
 }
 
 .input-error span.input-group input {
