@@ -112,8 +112,8 @@ span.input-group {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px;
-  outline: 1px solid transparent !important;
+  padding: 2px 10px 2px 0;
+  border-bottom: 1px solid transparent !important;
   border-radius: 5px;
 }
 
@@ -131,5 +131,5 @@ span.input-group label + input {
 }
 
 .input-error span.input-group {
-  outline: 1px solid #e33 !important;
+  border-bottom: 1px solid #e33 !important;
 }
