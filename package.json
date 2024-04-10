@@ -1,7 +1,7 @@
 {
   "name": "svelte-former",
-  "version": "0.0.1",
-  "description": "Svelte Form Eelement with easy validation",
+  "version": "0.0.2",
+  "description": "Svelte Form Element with easy validation",
   "files": [
     "dist"
   ],
