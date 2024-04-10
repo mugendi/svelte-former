@@ -205,7 +205,7 @@
               this={(input.wrap && input.wrap.element) ||
                 (typeof input.wrap == "string" ? input.wrap : "div")}
               class="{(input.wrap && input.wrap.classes && input.wrap.classes.join(' ')) ||
-                'col-sm-12'} {validation[input.name || input.id] ? 'input-error' : ''}"
+                'col-xs-12'} {validation[input.name || input.id] ? 'input-error' : ''}"
               title={(validation[input.name || input.id] &&
                 validation[input.name || input.id].message) ||
                 null}
