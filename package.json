@@ -1,9 +1,9 @@
 {
   "name": "svelte-former",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Svelte Form Element with easy validation",
   "files": [
-    "dist"
+    "src"
   ],
   "type": "module",
   "main": "./src/index.js",
@@ -14,9 +14,11 @@
     "validation",
     "component"
   ],
-  "author": "",
+  "author": "Anthony Mugendi <ngurumugz@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "fastest-validator": "^1.17.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": "https://github.com/mugendi/svelte-former.git"
 }
