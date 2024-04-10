@@ -6,15 +6,11 @@
 -->
 
 <script>
-  export let type = "text";
-  export let classes = [""];
-  export let placeholder = "Text input";
+  export let classes = [];
   export let value = null;
+  export let placeholder="Enter Value";
   export let id;
   export let required;
-
-
 </script>
 
-
-<textarea class="{classes.join(' ')}" type="text" {id} {placeholder} {required} bind:value />
+<textarea class={classes.join(" ")} type="text" {id} {placeholder} {required} bind:value />

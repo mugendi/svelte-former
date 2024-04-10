@@ -7,10 +7,10 @@
 
 <script>
   export let type = "text";
-  export let classes = [""];
-  export let placeholder = "Text input";
+  export let classes = [];
   export let value = null;
   export let values = [];
+  export let placeholder = "Enter Value";
   export let id;
   export let required;
   export let name;
@@ -19,8 +19,6 @@
   let checked;
   let origValue = value;
   export let selectedValue;
-
-
 
   $: if (type == "checkbox") {
     if (origValue) {
@@ -33,7 +31,7 @@
 
 {#if type == "text"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     type="text"
     {id}
     {placeholder}
@@ -44,7 +42,7 @@
   />
 {:else if type == "button"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -55,7 +53,7 @@
   />
 {:else if type == "color"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -66,7 +64,7 @@
   />
 {:else if type == "date"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -76,17 +74,10 @@
     type="date"
   />
 {:else if type == "datetime-local"}
-  <input
-    class="{classes.join(' ')}"
-    {id}
-    {placeholder}
-    {required}
-    bind:value
-    type="datetime-local"
-  />
+  <input class={classes.join(" ")} {id} {placeholder} {required} bind:value type="datetime-local" />
 {:else if type == "email"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -97,7 +88,7 @@
   />
 {:else if type == "file"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -108,7 +99,7 @@
   />
 {:else if type == "hidden"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -119,7 +110,7 @@
   />
 {:else if type == "image"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -127,11 +118,11 @@
     {autocomplete}
     bind:value
     type="image"
-    alt="{id}"
+    alt={id}
   />
 {:else if type == "month"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -142,7 +133,7 @@
   />
 {:else if type == "number"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -153,7 +144,7 @@
   />
 {:else if type == "password"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -164,7 +155,7 @@
   />
 {:else if type == "range"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -175,7 +166,7 @@
   />
 {:else if type == "reset"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -186,7 +177,7 @@
   />
 {:else if type == "search"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -197,7 +188,7 @@
   />
 {:else if type == "submit"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -208,7 +199,7 @@
   />
 {:else if type == "tel"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -219,7 +210,7 @@
   />
 {:else if type == "time"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -230,7 +221,7 @@
   />
 {:else if type == "url"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}
@@ -241,7 +232,7 @@
   />
 {:else if type == "week"}
   <input
-    class="{classes.join(' ')}"
+    class={classes.join(" ")}
     {id}
     {placeholder}
     {required}

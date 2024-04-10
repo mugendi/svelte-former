@@ -31,11 +31,13 @@ input::placeholder {
 input,
 textarea,
 select {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   background: #fff;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: inset 1px 1px 1px #cbced1, inset -6px -6px 6px white;
+  /* box-shadow: inset 1px 1px 1px #cbced1, inset -6px -6px 6px white; */
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+  box-shadow: rgba(0, 0, 0, 0.02) 2px 1px 3px 2px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 textarea {
@@ -102,4 +104,5 @@ button:hover {
 .input-error textarea,
 .input-error select {
   outline: 1px solid #e33 !important;
+  border-color: none;
 }

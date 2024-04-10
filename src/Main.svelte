@@ -168,7 +168,7 @@
     // }
 
     // console.log(JSON.stringify(schema, 0, 4));
-    // console.log(JSON.stringify(values, 0, 4));
+    console.log(JSON.stringify(values, 0, 4));
   }
 
   function doSubmit() {
@@ -220,13 +220,7 @@
               {#if input.element && Components[input.element]}
                 <svelte:component
                   this={Components[input.element]}
-                  id={input.id}
-                  type={input.type}
-                  placeholder={input.placeholder}
-                  required={input.required}
-                  classes={input.classes || []}
-                  name={input.name}
-                  values={input.values}
+                  {...input}
                   autocomplete={"autocomplete" in input
                     ? (input.autocomplete && input.autocomplete) || "off"
                     : null}

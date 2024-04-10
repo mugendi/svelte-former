@@ -6,37 +6,27 @@
 -->
 
 <script>
-  export let type = "text";
-  export let classes = [""];
-  export let placeholder = "Text input";
+  export let classes = [];
   export let value = null;
   export let values = [];
+  export let placeholder = "Select Value";
   export let id;
   export let required;
+
+  console.log({ placeholder });
 </script>
 
-<select class=" {classes.join(' ')}" type="text" {id} {placeholder} {required} bind:value>
+<select class="{classes.join(' ')} {value==null?"placeholder-val":""}" type="text" {id} {required} bind:value >
+  {#if placeholder}
+    <option value={null} disabled selected={true}>{placeholder}</option>
+  {/if}
   {#each values as option}
     <option value={option.value || option}>{option.text || option}</option>
   {/each}
 </select>
 
 <style>
-  .selectc:not(.is-multiple) {
-    height: 2.5em;
-  }
-  .selectc {
-    display: inline-block;
-    max-width: 100%;
-    position: relative;
-    vertical-align: top;
-  }
-  .selectc select {
-    padding-right: 2.5em;
-    cursor: pointer;
-    display: block;
-    font-size: 1em;
-    max-width: 100%;
-    outline: none;
+  select.placeholder-val{
+    color: #aaa !important;
   }
 </style>
