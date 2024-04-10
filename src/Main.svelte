@@ -184,61 +184,53 @@
   //   $: console.log(JSON.stringify(values,0,4));
 </script>
 
-<section class="section">
-  <div class="container">
-    <div class="">
-      <form action="" on:submit|preventDefault={doSubmit}>
-        {#if hasError}
-          <div class="error">
-            <h4>Form has errors!</h4>
-            <p>Please correct the following errors to submit form.</p>
-            <ol>
-              {#each Object.values(validation) as error}
-                <li>{error.message}</li>
-              {/each}
-            </ol>
-          </div>
+<form action="" on:submit|preventDefault={doSubmit}>
+  {#if hasError}
+    <div class="error">
+      <h4>Form has errors!</h4>
+      <p>Please correct the following errors to submit form.</p>
+      <ol>
+        {#each Object.values(validation) as error}
+          <li>{error.message}</li>
+        {/each}
+      </ol>
+    </div>
+  {/if}
+  <div class="form-fields grid-container">
+    {#each inputs as input (input.name || input.id)}
+      <svelte:element
+        this={(input.wrap && input.wrap.element) ||
+          (typeof input.wrap == "string" ? input.wrap : "div")}
+        class="{(input.wrap && input.wrap.classes && input.wrap.classes.join(' ')) ||
+          'col-xs-12'} {validation[input.name || input.id] ? 'input-error' : ''}"
+        title={(validation[input.name || input.id] && validation[input.name || input.id].message) ||
+          null}
+      >
+        <label
+          class="{(input.label.classes && input.label.classes.join(' ')) || ''}"
+          for={input.id}
+        >
+          {capitalCase(input.label.text || input.label)}
+        </label>
+
+        {#if input.element && Components[input.element]}
+          <svelte:component
+            this={Components[input.element]}
+            {...input}
+            autocomplete={"autocomplete" in input
+              ? (input.autocomplete && input.autocomplete) || "off"
+              : null}
+            bind:value={input.value}
+            bind:selectedValue={input.selectedValue}
+          />
         {/if}
-        <div class="form-fields grid-container">
-          {#each inputs as input (input.name || input.id)}
-            <svelte:element
-              this={(input.wrap && input.wrap.element) ||
-                (typeof input.wrap == "string" ? input.wrap : "div")}
-              class="{(input.wrap && input.wrap.classes && input.wrap.classes.join(' ')) ||
-                'col-xs-12'} {validation[input.name || input.id] ? 'input-error' : ''}"
-              title={(validation[input.name || input.id] &&
-                validation[input.name || input.id].message) ||
-                null}
-            >
-              <label
-                class="label {(input.label.classes && input.label.classes.join(' ')) || ''}"
-                for={input.id}
-              >
-                {capitalCase(input.label.text || input.label)}
-              </label>
+      </svelte:element>
+    {/each}
 
-              {#if input.element && Components[input.element]}
-                <svelte:component
-                  this={Components[input.element]}
-                  {...input}
-                  autocomplete={"autocomplete" in input
-                    ? (input.autocomplete && input.autocomplete) || "off"
-                    : null}
-                  bind:value={input.value}
-                  bind:selectedValue={input.selectedValue}
-                />
-              {/if}
-            </svelte:element>
-          {/each}
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button>Submit</button>
-            </div>
-          </div>
-        </div>
-      </form>
+    <div class="field is-grouped">
+      <div class="control">
+        <button>Submit</button>
+      </div>
     </div>
   </div>
-</section>
-
+</form>

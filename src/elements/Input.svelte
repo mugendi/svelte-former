@@ -244,27 +244,32 @@
 
   <!-- Radio & Checkbox -->
 {:else if type == "radio"}
-  {#each values as _value}
+  <span class="input-group">
+    {#each values as _value}
+      <input
+        class="radio {classes.join(' ')}"
+        {id}
+        {placeholder}
+        {required}
+        {name}
+        value={_value}
+        bind:group={value}
+        type="radio"
+      />
+      &nbsp; {_value}
+    {/each}
+  </span>
+{:else if type == "checkbox"}
+  <span class="input-group">
     <input
-      class="radio {classes.join(' ')}"
+      class="checkbox {classes.join(' ')}"
       {id}
       {placeholder}
       {required}
       {name}
-      value={_value}
-      bind:group={value}
-      type="radio"
+      bind:checked
+      bind:value
+      type="checkbox"
     />
-  {/each}
-{:else if type == "checkbox"}
-  <input
-    class="checkbox {classes.join(' ')}"
-    {id}
-    {placeholder}
-    {required}
-    {name}
-    bind:checked
-    bind:value
-    type="checkbox"
-  />
+  </span>
 {/if}
