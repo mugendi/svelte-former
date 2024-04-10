@@ -1,0 +1,105 @@
+/**
+ * Copyright (c) 2024 Anthony Mugendi
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+label,
+input,
+button,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+label {
+  margin-bottom: 40px;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 1px #cbced1, inset -6px -6px 6px white;
+}
+
+textarea {
+  min-height: 200px;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16px' height='16px' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.1018 8C5.02785 8 4.45387 9.2649 5.16108 10.0731L10.6829 16.3838C11.3801 17.1806 12.6197 17.1806 13.3169 16.3838L18.8388 10.0731C19.5459 9.2649 18.972 8 17.898 8H6.1018Z' fill='%23212121'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+input[type='radio'] {
+  height: 20px;
+  display: inline-block;
+  width: auto;
+}
+
+button {
+  color: white;
+  margin-top: 20px;
+  background: #1da1f2;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  padding: 10px;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+.form-fields {
+  margin: 40px 0 20px 0;
+}
+
+
+.error {
+  border: 2px solid #e33 !important;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgb(255, 235, 235);
+  color: #000 !important;
+}
+
+.error h4 {
+  color: #e33;
+}
+
+.error p {
+  padding: 5px 0 !important;
+  margin: 5px 0 !important;
+}
+
+.error ol {
+  margin: 10px 0 10px 30px !important;
+  font-size: 0.9rem;
+}
+
+.input-error input,
+.input-error textarea,
+.input-error select {
+  outline: 1px solid #e33 !important;
+}

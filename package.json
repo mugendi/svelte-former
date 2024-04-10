@@ -1,0 +1,22 @@
+{
+  "name": "svelte-former",
+  "version": "0.0.1",
+  "description": "Svelte Form Eelement with easy validation",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./src/index.js",
+  "scripts": {},
+  "keywords": [
+    "svelte",
+    "form",
+    "validation",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastest-validator": "^1.17.0"
+  }
+}
