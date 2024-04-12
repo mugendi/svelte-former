@@ -1,0 +1,112 @@
+<!--
+ Copyright (c) 2024 Anthony Mugendi
+ 
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+-->
+
+<script>
+  import { controlError } from "../../lib/utils";
+  import { currentField } from "../../lib/store";
+  import Label from "../Label.svelte";
+  import FieldError from "./FieldError.svelte";
+  import { onMount } from "svelte";
+  export let control;
+  // export let values;
+  export let validationErrors;
+
+  // let element;
+  let elements = [];
+
+  //   radio boxes must have an array 'value' attribute
+  if (control.attributes.type == "radio" && !Array.isArray(control.attributes.value)) {
+    controlError(
+      control,
+      "Radio Inputs must have a 'value' property which must be an array of values."
+    );
+  }
+
+  function setValue() {
+    let element = elements.filter(
+      (el) => (control.attributes.type !== "radio" && true) || el.checked
+    )[0];
+
+    if (!element) {
+      // console.log(elements);
+      return;
+    }
+
+    currentField.update((o) => elements[0].name);
+
+    if (control.attributes.type == "checkbox") {
+      control._value = element.checked;
+    } else if (control.attributes.type == "radio") {
+      if (element.checked) {
+        control._value = element.value;
+      }
+    } else {
+      control._value = element.value;
+    }
+  }
+
+  // onMount(setValue);
+
+  // console.log(JSON.stringify(values,0,4));
+</script>
+
+{#if control.attributes.type == "radio"}
+  <span class="element inline">
+    <span class="label-container">
+      <span class="center">
+        {#each control.attributes.value as value, i}
+          <svelte:element
+            this={control.element}
+            bind:this={elements[i]}
+            {...control.attributes}
+            value={value.value || value}
+            id={control.attributes.id + "-" + i}
+            on:change={setValue}
+            checked={value.checked}
+          />
+
+          <label class="radio-label" for={control.attributes.id + "-" + i}
+            >{value.text || value}</label
+          >
+        {/each}
+      </span>
+
+      <FieldError {control} {validationErrors} />
+    </span>
+  </span>
+{:else if control.attributes.type == "checkbox"}
+  <span class="element inline" {validationErrors}>
+    <span class="label-container">
+      <span class="center">
+        <svelte:element
+          this={control.element}
+          bind:this={elements[0]}
+          {...control.attributes}
+          on:change={setValue}
+        />
+        <Label {control} />
+      </span>
+      <FieldError {control} {validationErrors} />
+    </span>
+  </span>
+{:else}
+  <span class="element">
+    <span class="label-container">
+      <Label {control} />
+      <FieldError {control} {validationErrors} />
+    </span>
+
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <svelte:element
+      this={control.element}
+      bind:this={elements[0]}
+      {...control.attributes}
+      on:keyup={setValue}
+      on:change={setValue}
+    />
+  </span>
+{/if}

@@ -1,0 +1,180 @@
+/**
+ * Copyright (c) 2024 Anthony Mugendi
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+.former {
+  * {
+    box-sizing: border-box;
+  }
+  .control-group {
+    padding: 2px 10px 2px 0;
+    border-radius: 5px;
+    margin: 0;
+
+    textarea {
+      min-height: 200px;
+    }
+
+    input,
+    textarea,
+    select {
+      display: block;
+      padding: 5px;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+      font-size: 1.1rem;
+      color: #444;
+      width: 100%;
+      background: #fff;
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+      border-radius: 5px;
+
+      &[placeholder] {
+        color: #999;
+      }
+    }
+
+    input[type='radio'],
+    input[type='checkbox'] {
+      height: 20px;
+      display: inline-block;
+      width: auto;
+      box-shadow: none;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16px' height='16px' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.1018 8C5.02785 8 4.45387 9.2649 5.16108 10.0731L10.6829 16.3838C11.3801 17.1806 12.6197 17.1806 13.3169 16.3838L18.8388 10.0731C19.5459 9.2649 18.972 8 17.898 8H6.1018Z' fill='%23212121'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+    }
+
+    // element
+    .element {
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+
+      .label-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .center {
+          display: flex;
+        }
+
+        label {
+          margin-bottom: 5px;
+          display: block;
+          font-size: 1.1em;
+          font-weight: 500;
+          text-wrap: nowrap;
+        }
+
+        .field-error {
+          font-size: 0.7em;
+          color: #444;
+          text-wrap: wrap;
+          margin-left: 10px;
+          padding-bottom: 5px;
+          line-height: 1.5;
+        }
+      }
+
+      input + label + input {
+        margin-left: 15px;
+      }
+
+      &.inline {
+        display: flex !important;
+        align-items: center;
+        label {
+          margin: 0 0 0 5px;
+          padding: 0;
+          font-weight: normal;
+          font-size: 0.9em;
+        }
+      }
+
+      &:hover {
+        background: #f9f9f9;
+      }
+    }
+
+    &.has-error {
+      .element {
+        display: block;
+        border-bottom: 2px solid #e55 !important;
+        background: #fee;
+        border-radius: 10px;
+      }
+    }
+
+    &.controls {
+      margin-top: 20px;
+    }
+  }
+
+  .form-errors {
+    border-bottom: 2px solid #e55 !important;
+    background: #fee;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0 20px;
+
+    h4,
+    p {
+      margin: 5px 0 !important;
+    }
+
+    ol {
+      margin: 10px 0 5px 30px;
+    }
+  }
+
+  button {
+    background-color: #eee;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #222222;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    padding: 13px 23px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
+      transform 0.1s;
+    user-select: none;
+    -webkit-user-select: none;
+    width: auto;
+
+    &:hover,
+    &:active {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      filter: brightness(120%);
+    }
+
+    &:disabled {
+      border-color: #dddddd;
+      color: #dddddd;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
+
+
+  
+}

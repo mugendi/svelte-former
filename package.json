@@ -17,7 +17,9 @@
   "author": "Anthony Mugendi <ngurumugz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "fastest-validator": "^1.17.0"
+    "defaults": "^3.0.0",
+    "fastest-validator": "^1.17.0",
+    "svelte": "^4.2.13"
   },
   "devDependencies": {},
   "repository": "https://github.com/mugendi/svelte-former.git"
