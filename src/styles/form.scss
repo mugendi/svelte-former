@@ -170,11 +170,10 @@
         .label-container {
           flex-direction: column;
         }
-
         
-
         .field-error {
           width: 100%;
+          margin-left: 0 !important;
         }
       }
     }
