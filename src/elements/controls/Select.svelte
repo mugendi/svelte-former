@@ -13,6 +13,7 @@
   export let control;
   export let validationErrors;
   export let controls;
+  export let controlContainer;
 
   // select box must
   if (!Array.isArray(control.options)) {
@@ -45,7 +46,6 @@
           }
         }
       }
-
     }
   }
 
@@ -75,20 +75,23 @@
     <Label {control} />
     <FieldError {control} {validationErrors} />
   </span>
-  <select
-    this={control.element}
-    bind:this={element}
-    {...control.attributes}
-    on:change={setValue}
-    placeholder={control.attributes.placeholder && !control._value
-      ? control.attributes.placeholder
-      : null}
-  >
-    {#if control.attributes.placeholder}
-      <option disabled selected value={null}>{control.attributes.placeholder}</option>
-    {/if}
-    {#each control.options as option}
-      <option value={option.value || option}>{option.text || option}</option>
-    {/each}
-  </select>
+
+  <span bind:this={controlContainer}>
+    <select
+      this={control.element}
+      bind:this={element}
+      {...control.attributes}
+      on:change={setValue}
+      placeholder={control.attributes.placeholder && !control._value
+        ? control.attributes.placeholder
+        : null}
+    >
+      {#if control.attributes.placeholder}
+        <option disabled selected value={null}>{control.attributes.placeholder}</option>
+      {/if}
+      {#each control.options as option}
+        <option value={option.value || option}>{option.text || option}</option>
+      {/each}
+    </select>
+  </span>
 </span>

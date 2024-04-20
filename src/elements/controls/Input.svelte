@@ -14,6 +14,7 @@
   export let control;
   // export let values;
   export let validationErrors;
+  export let controlContainer;
 
   // let element;
   let elements = [];
@@ -57,7 +58,7 @@
 {#if control.attributes.type == "radio"}
   <span class="element inline">
     <span class="label-container">
-      <span class="center">
+      <span class="center" bind:this={controlContainer}>
         {#each control.attributes.value as value, i}
           <svelte:element
             this={control.element}
@@ -81,7 +82,7 @@
 {:else if control.attributes.type == "checkbox"}
   <span class="element inline" {validationErrors}>
     <span class="label-container">
-      <span class="center">
+      <span class="center" bind:this={controlContainer}>
         <svelte:element
           this={control.element}
           bind:this={elements[0]}
@@ -101,12 +102,14 @@
     </span>
 
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <svelte:element
-      this={control.element}
-      bind:this={elements[0]}
-      {...control.attributes}
-      on:keyup={setValue}
-      on:change={setValue}
-    />
+    <span bind:this={controlContainer}>
+      <svelte:element
+        this={control.element}
+        bind:this={elements[0]}
+        {...control.attributes}
+        on:keyup={setValue}
+        on:change={setValue}
+      />
+    </span>
   </span>
 {/if}

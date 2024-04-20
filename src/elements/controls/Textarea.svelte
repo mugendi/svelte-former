@@ -11,6 +11,7 @@
   import FieldError from "./FieldError.svelte";
   export let control;
   export let validationErrors;
+  export let controlContainer;
 
   let element;
 
@@ -28,11 +29,14 @@
     <Label {control} />
     <FieldError {control} {validationErrors} />
   </span>
-  <textarea
-    this={control.element}
-    bind:this={element}
-    {...control.attributes}
-    on:keyup={setValue}
-    on:change={setValue}
-  />
+
+  <span bind:this={controlContainer}>
+    <textarea
+      this={control.element}
+      bind:this={element}
+      {...control.attributes}
+      on:keyup={setValue}
+      on:change={setValue}
+    />
+  </span>
 </span>
