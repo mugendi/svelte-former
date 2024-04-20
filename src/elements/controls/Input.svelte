@@ -55,6 +55,8 @@
   // console.log(JSON.stringify(values,0,4));
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+
 {#if control.attributes.type == "radio"}
   <span class="element inline">
     <span class="label-container">
@@ -94,6 +96,16 @@
       <FieldError {control} {validationErrors} />
     </span>
   </span>
+{:else if control.attributes.type == "hidden"}
+  <span bind:this={controlContainer}>
+    <svelte:element
+      this={control.element}
+      bind:this={elements[0]}
+      {...control.attributes}
+      on:keyup={setValue}
+      on:change={setValue}
+    />
+  </span>
 {:else}
   <span class="element">
     <span class="label-container">
@@ -101,7 +113,6 @@
       <FieldError {control} {validationErrors} />
     </span>
 
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <span bind:this={controlContainer}>
       <svelte:element
         this={control.element}

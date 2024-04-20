@@ -8,12 +8,10 @@
 <script>
   export let control;
 
-  let classes = control.label.classes ? control.label.classes.join(" ") : "";
-  let labelText = control.label.text || control.label;
+  let classes = control.label && control.label.classes ? control.label.classes.join(" ") : "";
+  let labelText = (control.label && control.label.text) || control.label || "";
 </script>
 
 <label class={classes} for={control.attributes.id}>
   <span>{labelText}</span>
-
-
 </label>
