@@ -71,8 +71,6 @@
     });
 
 
-    console.log({controls});
-
     // ensure unique ids
     let ids = controls.map((o) => o.attributes.id);
     let idsObj = {};
