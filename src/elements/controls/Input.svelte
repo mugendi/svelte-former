@@ -138,9 +138,14 @@
         on:change={setValue}
       />
 
-      {#if control.isPassword}        ​
+      {#if control.isPassword}
+        ​
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <span class="control-icon" title="Show" on:click={toggleHidden}>
+        <span
+          class="control-icon"
+          title={control.showHidden ? "Hide" : "Show"}
+          on:click={toggleHidden}
+        >
           <Icons icon={control.showHidden ? "eyeClosed" : "eyeOpen"} />
         </span>
       {/if}
