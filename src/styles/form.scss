@@ -67,6 +67,22 @@
       display: block;
       padding: 10px;
       border-radius: 5px;
+      position: relative;
+
+      .control-icon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 5px;
+        bottom:-5px;
+        cursor: pointer;
+        padding: 5px 10px;
+
+        svg{
+          max-width: 20px !important;
+          height: auto !important;
+        }
+      }
 
       .label-container {
         display: flex;

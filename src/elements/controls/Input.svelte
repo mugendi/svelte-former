@@ -11,6 +11,7 @@
   import Label from "../Label.svelte";
   import FieldError from "./FieldError.svelte";
   import { onMount } from "svelte";
+  import Icons from "../Icons.svelte";
   export let control;
   // export let values;
   export let validationErrors;
@@ -47,6 +48,21 @@
       }
     } else {
       control._value = element.value;
+    }
+  }
+
+  if (control.attributes.type == "password") {
+    control.isPassword = true;
+  }
+
+  function toggleHidden() {
+    control.showHidden = "showHidden" in control ? control.showHidden : false;
+    control.showHidden = !control.showHidden;
+
+    if (control.showHidden) {
+      control.attributes.type = "text";
+    } else {
+      control.attributes.type = "password";
     }
   }
 
@@ -121,6 +137,13 @@
         on:keyup={setValue}
         on:change={setValue}
       />
+
+      {#if control.isPassword}        ​
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <span class="control-icon" title="Show" on:click={toggleHidden}>
+          <Icons icon={control.showHidden ? "eyeClosed" : "eyeOpen"} />
+        </span>
+      {/if}
     </span>
   </span>
 {/if}
