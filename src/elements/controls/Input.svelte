@@ -72,9 +72,9 @@
             checked={value.checked}
           />
 
-          <label class="radio-label" for={control.attributes.id + "-" + i}
-            >{value.text || value}</label
-          >
+          <label class="radio-label" for={control.attributes.id + "-" + i}>
+            {value.text || value}
+          </label>
         {/each}
       </span>
 
@@ -82,7 +82,7 @@
     </span>
   </span>
 {:else if control.attributes.type == "checkbox"}
-  <span class="element inline" {validationErrors}>
+  <span class="element inline">
     <span class="label-container">
       <span class="center" bind:this={controlContainer}>
         <svelte:element

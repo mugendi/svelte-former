@@ -13,6 +13,6 @@
 <!-- Field Error -->
 {#if validationErrors && validationErrors[control.attributes.name]}
   <span class="field-error">
-    {validationErrors[control.attributes.name]}
+    {@html validationErrors[control.attributes.name]}
   </span>
 {/if}

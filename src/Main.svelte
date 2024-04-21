@@ -18,19 +18,19 @@
   import "./styles/form.scss";
 
   import defaults from "defaults";
-  import v from "./lib/validator";
   import {
-    buttonSchema,
-    capitaliseWord,
     controlSchema,
     validationError,
+    buttonSchema,
     validationTypes,
-  } from "./lib/utils";
+    v,
+  } from "./lib/validator";
+  import { capitaliseWord } from "./lib/utils";
   import Control from "./elements/Control.svelte";
   import { onMount, afterUpdate } from "svelte";
   import Button from "./elements/controls/Button.svelte";
   import { currentField } from "./lib/store";
-
+  
   export let controls = [];
   export let onSubmit = function () {};
   export let buttons = [{ text: "Submit", attributes: { type: "submit" }, css: { color: "red" } }];
@@ -70,7 +70,6 @@
       return o;
     });
 
-
     // ensure unique ids
     let ids = controls.map((o) => o.attributes.id);
     let idsObj = {};
@@ -83,7 +82,7 @@
   }
 
   //
-  $: if (formEl && controls.length && values) {
+  $: {
     // console.log({$currentField , s:"ffff"});
     for (let control of controls) {
       if ($currentField === control.attributes.name) {
@@ -158,15 +157,19 @@
     // validationErrors = {};
     let isValid = validationCheck(values);
     if (isValid !== true) {
+      control.hasError = true;
       // validationErrors.fields = isValid.map((o) => o.field);
       for (let i in isValid) {
         validationErrors[isValid[i].field] = isValid[i].message;
+
         if (isValid[i].expected) {
           validationErrors[isValid[i].field] =
+            (control.validate && control.validate.message) ||
             validationErrors[isValid[i].field] + " Expected: " + isValid[i].expected;
         }
       }
     } else {
+      control.hasError = false;
       delete validationErrors[$currentField];
     }
 
@@ -204,25 +207,33 @@
     values = {};
   });
 
-  onMount(() => {
+  onMount(async () => {
+
+
     isReady = true;
   });
+
+
 </script>
 
+
+
+
 <form class="former row" action="" on:submit|preventDefault={doSubmit} bind:this={formEl}>
+
+
   <div class="form-fields row">
     {#each controls as control}
-      <svelte:element
-        this={wrapElement(control)}
-        class="control-group {validationErrors[control.attributes.name]
-          ? 'has-error'
-          : ''} {wrapClasses(control)} "
-      >
-        <!-- Actual Control -->
-      
-        <Control bind:control bind:validationErrors bind:controls />
-        
-      </svelte:element>
+      <div class="control-group {wrapClasses(control)}">
+        <svelte:element
+          this={wrapElement(control)}
+          class="{validationErrors[control.attributes.name] ? 'has-error' : ''}  "
+        >
+          <!-- Actual Control -->
+
+          <Control bind:control bind:validationErrors bind:controls />
+        </svelte:element>
+      </div>
     {/each}
   </div>
 
@@ -234,3 +245,6 @@
     </div>
   </div>
 </form>
+
+<style>
+</style>

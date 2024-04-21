@@ -27,45 +27,6 @@
 
   let element;
 
-  $: if (control.dynamicOptions) {
-    // let d = control.options0[$currentField];
-    let key = $currentField + "=" + control._value;
-    let key2 = $currentField + "=*";
-    let optObj;
-
-    if (control.dynamicOptions[key] || control.dynamicOptions[key2]) {
-      optObj = control.dynamicOptions[key] || control.dynamicOptions[key2];
-
-      for (key in optObj) {
-        for (let c of controls) {
-          if (c.attributes.name == key) {
-            c.options = [];
-            if (Array.isArray(optObj[key])) {
-              c.options = optObj[key];
-            }
-          }
-        }
-      }
-    }
-  }
-
-  async function setDynamicOptions() {
-    let key = $currentField + "=" + control._value;
-    console.log({ key });
-    // // console.log({ $currentField });
-    // if (Array.isArray(control.dynamicOptions[key])) {
-    //   // console.log(control.dynamicOptions[$currentField]);
-    //   setDynamicOptions(control.dynamicOptions[key]);
-    // }
-    // if (opts == "function") {
-    //   control.options = await opts();
-    // } else {
-    //   control.options = opts;
-    // }
-
-    control.options = ["we", "red"];
-  }
-
   // onMount(setValue);
 </script>
 
