@@ -192,6 +192,9 @@
   }
 
   function wrapClasses(control) {
+    if(control.attributes.type == 'hidden'){
+      return 'hidden'
+    }
     return (control.wrap && control.wrap.classes && control.wrap.classes.join(" ")) || "cell-sm-12";
   }
 

@@ -16,6 +16,10 @@
     margin: 0;
     width: 100%;
 
+    .hidden{
+      display: none;
+    }
+
     textarea {
       min-height: 200px;
     }
