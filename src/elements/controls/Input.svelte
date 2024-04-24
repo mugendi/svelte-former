@@ -10,7 +10,6 @@
   import { currentField } from "../../lib/store";
   import Label from "../Label.svelte";
   import FieldError from "./FieldError.svelte";
-  import { onMount } from "svelte";
   import Icons from "../Icons.svelte";
   export let control;
   // export let values;

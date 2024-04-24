@@ -16,8 +16,7 @@
   // https://erikmonjas.github.io/css-grid-12-column-layout/
   import "./styles/grid.scss";
   import "./styles/form.scss";
-
-  import defaults from "defaults";
+  import { merge } from "./lib/merge";
   import {
     controlSchema,
     validationError,
@@ -30,7 +29,7 @@
   import { onMount, afterUpdate } from "svelte";
   import Button from "./elements/controls/Button.svelte";
   import { currentField } from "./lib/store";
-  
+
   export let controls = [];
   export let onSubmit = function () {};
   export let buttons = [{ text: "Submit", attributes: { type: "submit" }, css: { color: "red" } }];
@@ -59,13 +58,16 @@
     }
 
     controls = controls.map((o, i) => {
-      o = defaults(o, {
-        idx: i,
-        label: o.attributes.name ? capitaliseWord(o.attributes.name) : "",
-        attributes: {
-          id: "control-" + (i + 1),
+      o = merge(
+        {
+          idx: i,
+          label: o.attributes.name ? capitaliseWord(o.attributes.name) : "",
+          attributes: {
+            id: "control-" + (i + 1),
+          },
         },
-      });
+        o
+      );
 
       return o;
     });
@@ -82,7 +84,7 @@
   }
 
   //
-  $: {
+  $:  {
     // console.log({$currentField , s:"ffff"});
     for (let control of controls) {
       if ($currentField === control.attributes.name) {
@@ -93,6 +95,10 @@
 
   function validate(control) {
     // console.log(JSON.stringify({ control }, 0, 4));
+
+    if (!formEl) {
+      return;
+    }
 
     if (["input", "textarea", "select"].indexOf(control.element) == -1) {
       return;
@@ -120,7 +126,7 @@
 
     // radio input
     if (control.attributes.type !== "radio" && control._value !== undefined) {
-      control.attributes.value = control._value;
+      control.attributes.value = control._value || control.attributes.value;
     }
 
     // ensure checkbox
@@ -174,6 +180,8 @@
     }
 
     validationErrors = validationErrors;
+
+    
   }
 
   function wrapElement(control) {
@@ -208,20 +216,11 @@
   });
 
   onMount(async () => {
-
-
     isReady = true;
   });
-
-
 </script>
 
-
-
-
 <form class="former row" action="" on:submit|preventDefault={doSubmit} bind:this={formEl}>
-
-
   <div class="form-fields row">
     {#each controls as control}
       <div class="control-group {wrapClasses(control)}">

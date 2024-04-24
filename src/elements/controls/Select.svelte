@@ -43,7 +43,7 @@
       bind:this={element}
       {...control.attributes}
       on:change={setValue}
-      placeholder={control.attributes.placeholder && !control._value
+      placeholder={control.attributes.placeholder && !control._value && !control.attributes.value
         ? control.attributes.placeholder
         : null}
     >

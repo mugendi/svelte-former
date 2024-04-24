@@ -7,7 +7,6 @@
 
 <script>
   import { onMount } from "svelte";
-
   export let button;
   export let element;
 

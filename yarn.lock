@@ -85,11 +85,6 @@ css-tree@^2.3.1:
     mdn-data "2.0.30"
     source-map-js "^1.0.1"
 
-defaults@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/defaults/-/defaults-3.0.0.tgz#60b9e0003df1018737c2ce3f4289d8f64786c9c4"
-  integrity sha512-RsqXDEAALjfRTro+IFNKpcPCt0/Cy2FqHSIlnomiJp9YGadpQnrtbRpSgN2+np21qHcIKiva4fiOQGjS9/qR/A==
-
 dequal@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"

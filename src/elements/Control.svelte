@@ -10,9 +10,8 @@
   import Input from "./controls/Input.svelte";
   import Select from "./controls/Select.svelte";
   import Textarea from "./controls/Textarea.svelte";
-  import defaults from "defaults";
   import { controlSchema, v } from "../lib/validator";
-  // import { currentField } from "../lib/store";
+  import { merge } from "../lib/merge";
 
   export let controls;
   export let control;
@@ -46,7 +45,8 @@
 
     for (let i in controls) {
       if (controls[i].attributes.name == name) {
-        newControl = defaults(data, controls[i]);
+        
+        newControl = merge(controls[i], data);
 
         check = v.compile(controlSchema);
         isValid = check([newControl]);
@@ -64,7 +64,7 @@
               err = err + " Expected: " + isValid[i].expected;
             }
 
-            console.error("OnChange Error for " + newControl.attributes.name + " Field\n  " + err);
+            // console.error("OnChange Error for " + newControl.attributes.name + " Field\n  " + err);
           }
         }
       }
@@ -143,8 +143,6 @@
     }, 0);
     // }
   }
-
-
 
   onMount(() => {
     if (controlContainer) {
