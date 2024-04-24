@@ -52,7 +52,10 @@
         isValid = check([newControl]);
         // ensure new control is valid
         if (isValid === true) {
-          control.resetValues[name] = control.resetValues[name] || Object.assign({}, controls[i]);
+          if (control.resetValues) {
+            control.resetValues[name] = control.resetValues[name] || Object.assign({}, controls[i]);
+          }
+
           controls[i] = newControl;
         } else {
           for (let i in isValid) {
@@ -140,6 +143,8 @@
     }, 0);
     // }
   }
+
+
 
   onMount(() => {
     if (controlContainer) {

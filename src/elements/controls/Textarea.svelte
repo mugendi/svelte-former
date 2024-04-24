@@ -26,7 +26,7 @@
 <!-- Input Label -->
 <span class="element">
   <span class="label-container">
-    <Label {control} />
+    <Label bind:control />
     <FieldError {control} {validationErrors} />
   </span>
 

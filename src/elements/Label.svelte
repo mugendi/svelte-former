@@ -11,10 +11,13 @@
   export let control;
 
   let classes = control.label && control.label.classes ? control.label.classes.join(" ") : "";
-  let labelText =
+  let labelText;
+
+  $: labelText =
     (control.label && control.label.text) ||
     control.label ||
     capitaliseWord(control.attributes.name);
+    
 </script>
 
 <label class={classes} for={control.attributes.id}>

@@ -107,7 +107,7 @@
           {...control.attributes}
           on:change={setValue}
         />
-        <Label {control} />
+        <Label bind:control />
       </span>
       <FieldError {control} {validationErrors} />
     </span>
@@ -125,7 +125,7 @@
 {:else}
   <span class="element">
     <span class="label-container">
-      <Label {control} />
+      <Label bind:control />
       <FieldError {control} {validationErrors} />
     </span>
 
