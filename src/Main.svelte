@@ -84,7 +84,7 @@
   }
 
   //
-  $:  {
+  $: {
     // console.log({$currentField , s:"ffff"});
     for (let control of controls) {
       if ($currentField === control.attributes.name) {
@@ -180,8 +180,6 @@
     }
 
     validationErrors = validationErrors;
-
-    
   }
 
   function wrapElement(control) {
@@ -192,8 +190,8 @@
   }
 
   function wrapClasses(control) {
-    if(control.attributes.type == 'hidden'){
-      return 'hidden'
+    if (control.attributes.type == "hidden") {
+      return "hidden";
     }
     return (control.wrap && control.wrap.classes && control.wrap.classes.join(" ")) || "cell-sm-12";
   }
@@ -210,7 +208,7 @@
     }
 
     if (typeof onSubmit == "function") {
-      onSubmit(values);
+      onSubmit(values, { method: "POST" });
     }
   }
 
