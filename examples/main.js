@@ -136,6 +136,7 @@ let controls = [
     },
 ];
 
+console.log(">>>>");
 let s = new SvelteFormer({
     target: document.body,
     props: {
