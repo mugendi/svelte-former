@@ -6,37 +6,18 @@
 -->
 
 <script>
-  import { currentField } from "../../lib/store";
+  import Error from "../Error.svelte";
   import Label from "../Label.svelte";
-  import FieldError from "./FieldError.svelte";
+
   export let control;
-  export let validationErrors;
-  export let controlContainer;
+  export let onChange;
 
-  let element;
-
-  function setValue() {
-    currentField.update((o) => element.name);
-    control._value = element.value;
-  }
-
-  // onMount(setValue);
+  //   $: console.log(JSON.stringify(control, 0, 4));
 </script>
 
-<!-- Input Label -->
-<span class="element">
-  <span class="label-container">
-    <Label bind:control />
-    <FieldError {control} {validationErrors} />
-  </span>
+<div class="label-container">
+  <Label bind:control />
+  <Error bind:control />
+</div>
 
-  <span bind:this={controlContainer}>
-    <textarea
-      this={control.element}
-      bind:this={element}
-      {...control.attributes}
-      on:keyup={setValue}
-      on:change={setValue}
-    />
-  </span>
-</span>
+<textarea {...control.attributes} on:change={onChange} on:keyup={onChange}   />

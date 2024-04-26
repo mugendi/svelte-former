@@ -6,20 +6,18 @@
 -->
 
 <script>
-  import { capitaliseWord } from "../lib/utils";
+  import { labelText } from "../lib/utils.js";
 
   export let control;
+  export let label;
+  export let id;
 
-  let classes = control.label && control.label.classes ? control.label.classes.join(" ") : "";
-  let labelText;
-
-  $: labelText =
-    (control.label && control.label.text) ||
-    control.label ||
-    capitaliseWord(control.attributes.name);
-    
+  $: if (!label) {
+    label = labelText(control);
+  }
 </script>
 
-<label class={classes} for={control.attributes.id}>
-  <span>{labelText}</span>
-</label>
+
+<label for={id || control.attributes.id}>{@html label}</label>
+
+

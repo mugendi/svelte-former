@@ -8,7 +8,9 @@
   ],
   "type": "module",
   "main": "./src/index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "rollup -c -w"
+  },
   "keywords": [
     "svelte",
     "form",
@@ -18,9 +20,18 @@
   "author": "Anthony Mugendi <ngurumugz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "fastest-validator": "^1.17.0",
+    "fastest-validator": "^1.18.0",
     "svelte": "^4.2.13"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^4.16.4",
+    "rollup-plugin-reloadsite": "^1.0.4",
+    "rollup-plugin-serve": "^1.1.1",
+    "rollup-plugin-styles": "^4.0.0",
+    "rollup-plugin-svelte": "^7.2.0",
+    "sass": "^1.75.0"
+  },
   "repository": "https://github.com/mugendi/svelte-former.git"
 }

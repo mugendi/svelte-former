@@ -5,12 +5,10 @@
  * https://opensource.org/licenses/MIT
  */
 
+export let formInputTypes = ['input', 'select', 'textarea'];
+
 const magicSplit =
   /^[a-zà-öø-ÿ]+|[A-ZÀ-ÖØ-ß][a-zà-öø-ÿ]+|[a-zà-öø-ÿ]+|[0-9]+|[A-ZÀ-ÖØ-ß]+(?![a-zà-öø-ÿ])/g;
-
-
-
-
 
 /**
  * Capitalises a single word
@@ -25,9 +23,17 @@ export function capitaliseWord(string) {
   );
 }
 
-export function controlError(control, errorMessage) {
-  throw new Error(
-    'Error with control [' + control.idx + ']\n  ' + errorMessage
-  );
+export function labelText(control) {
+  let label;
+  if (control.label) {
+    label = control.label.text || control.label;
+  } else {
+    label = capitaliseWord(control.attributes.name);
+  }
+
+  return label;
 }
 
+export function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
