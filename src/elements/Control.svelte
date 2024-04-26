@@ -15,42 +15,53 @@
   import { currentControl } from "../lib/store";
 
   export let control;
-  export let idx;
 
   let type;
 
-  $: {
+  $: if (control) {
+    // if is a form input and not other element
     if (formInputTypes.indexOf(control.element) > -1) {
       type = control.attributes.type || control.element;
     }
+
+    if (control.creationMethod == "dynamic") {
+      // validate value...
+      validateValue(control);
+    }
   }
 
-  function onChange(e, val) {
+  function onChange(e, val, element) {
     let value;
 
     if (e) {
       let el = e.target;
+      element = el.tagName.toLowerCase();
+
+      type = el.type;
+
       if (el.type == "checkbox") {
         value = el.checked;
       } else {
         value = el.value;
       }
     } else {
+      type = control.attributes.type
       value = val;
     }
 
+
     control.attributes.value = value;
-    validateValue(control, idx);
+
+    validateValue(control);
 
     currentControl.update((o) => control);
-
   }
 
   // run onChange if there is a value passed on creation
   onMount(function () {
     if (control.attributes && ("value" in control.attributes || control.attributes.required)) {
       setTimeout(() => {
-        onChange(null, control.attributes.value);
+        onChange(null, control.attributes.value, control.element);
       }, 1);
     }
   });

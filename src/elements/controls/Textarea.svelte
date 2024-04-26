@@ -20,4 +20,4 @@
   <Error bind:control />
 </div>
 
-<textarea {...control.attributes} on:change={onChange} on:keyup={onChange}   />
+<textarea {...control.attributes} on:change={onChange} on:keyup={onChange} />

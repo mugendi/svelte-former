@@ -278,7 +278,7 @@ export function validateValue(control) {
     }
 
 
-    console.log(JSON.stringify(valueSchema,0,4));
+    // console.log(JSON.stringify(valueSchema,0,4));
 
     let schema = {
         value: valueSchema,

@@ -53,60 +53,74 @@
   }
 
   async function propagateOnChange(control) {
-    if ("onChange" in control === false) {
-      return;
-    }
-
-    let onChangeObj;
-    let setValue;
-    let newControl;
-
-    for (let i in control.onChange) {
-      onChangeObj = control.onChange[i];
-
-      // check value if set
-      if ("value" in onChangeObj && control.attributes.value !== onChangeObj.value) {
-        continue;
-      }
-      // console.log(onChangeObj);
-
-      if (typeof onChangeObj.set == "function") {
-        setValue = await onChangeObj.set();
-      } else {
-        setValue = await onChangeObj.set;
+    try {
+      if ("onChange" in control === false) {
+        return;
       }
 
-      if (typeof setValue == "object") {
-        // loop through all the names returned by set
-        for (let name in setValue) {
-          // find control with name
-          for (let i in controls) {
-            if ("attributes" in controls[i] === false || name !== controls[i].attributes.name) {
-              continue;
-            }
+      let onChangeObj;
+      let setValue;
 
-            newControl = merge(
-              controls[i],
-              setValue[name],
-              // do not change some values such as element & attributes.type
-              {
-                element: controls[i].element,
-                attributes: {
-                  id: controls[i].attributes.id,
-                  name: controls[i].attributes.name,
-                  type: controls[i].attributes.type,
-                },
+      // control.onChangeResets = control.onChangeResets || {};
+
+      for (let i in control.onChange) {
+        onChangeObj = control.onChange[i];
+
+        if (typeof onChangeObj.set == "function") {
+          setValue = await onChangeObj.set();
+        } else {
+          setValue = await onChangeObj.set;
+        }
+
+        if (typeof setValue == "object") {
+          // loop through all the names returned by set
+          for (let name in setValue) {
+            // find control with name
+            for (let i in controls) {
+              let newControl = null;
+
+              if ("attributes" in controls[i] === false || name !== controls[i].attributes.name) {
+                continue;
               }
-            );
 
-            // console.log(JSON.stringify(newControl,0,4));
-            // validate
-            validateControl(newControl);
-            // assign value
-            controls[i] = newControl;
+              // check value if set
+              if ("value" in onChangeObj && control.attributes.value !== onChangeObj.value) {
+                newControl = control.onChangeResets[name];
+              } else {
+                // console.log(onChangeObj);
+
+                control.onChangeResets[name] =
+                  control.onChangeResets[name] || merge({}, controls[i]);
+
+                newControl = merge(
+                  controls[i],
+                  setValue[name],
+                  // do not change some values such as element & attributes.type
+                  {
+                    element: controls[i].element,
+                    attributes: {
+                      id: controls[i].attributes.id,
+                      name: controls[i].attributes.name,
+                      type: controls[i].attributes.type,
+                    },
+                    creationMethod: "dynamic",
+                  }
+                );
+              }
+
+              if (newControl) {
+                // validate
+                validateControl(newControl);
+                // assign value
+                controls[i] = newControl;
+                currentControl.update((o) => controls[i]);
+              }
+            }
           }
         }
       }
+    } catch (error) {
+      throw error;
     }
   }
 

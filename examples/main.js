@@ -11,7 +11,7 @@ let controls = [
         attributes: {
             name: 'one',
             value: 'One',
-            min:'5'
+            min: '5',
         },
         classes: ['col-sm-12', 'col-md-6'],
         validation: {
@@ -21,14 +21,14 @@ let controls = [
         label: '<i>RRRR</i>',
         onChange: [
             {
-                value: 'onetwo',
+                value: 'email',
                 set: function () {
                     return {
                         rre: {
                             element: 'textarea',
                             attributes: {
                                 type: 'email',
-                                value: 'Arabs Ogaden 2',
+                                value: 'name@gmail.com',
                             },
                         },
                     };
@@ -44,9 +44,8 @@ let controls = [
         },
         classes: ['col-sm-12', 'col-md-6'],
         validation: {
-            type: 'string',
-            min: 6,
-            // 
+            type: 'email',
+            //
         },
         label: 'PEE',
     },
@@ -55,11 +54,38 @@ let controls = [
         attributes: {
             name: 'two',
             //   required: true,
-            placeholder: 'select a value',
+            // placeholder: 'select a value',
         },
         options: ['Radio 1', 'Radio 2'],
         classes: ['col-sm-12', 'col-md-6'],
+        onChange: [
+            {
+                value: 'Radio 1',
+                set: function () {
+                    return {
+                        sss: {
+                            options: [1, 5, 6, 7],
+                            attributes: {
+                                placeholder: 'Select Number',
+                            },
+                        },
+                    };
+                },
+            },
+        ],
     },
+
+    {
+        element: 'select',
+        attributes: {
+            name: 'sss',
+            //   required: true,Number
+            // placeholder: 'Select ',
+        },
+        options: [],
+        classes: ['col-sm-12', 'col-md-6'],
+    },
+
     {
         element: 'input',
         attributes: {

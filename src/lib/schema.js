@@ -91,6 +91,7 @@ export const controlSchema = {
                 pattern: { type: 'string', optional: true },
                 list: { type: 'string', optional: true },
                 dirname: { type: 'string', optional: true },
+                lang: { type: 'string', optional: true },
 
                 required: { type: 'boolean', optional: true, convert: true },
                 readonly: { type: 'boolean', optional: true, convert: true },
@@ -108,6 +109,8 @@ export const controlSchema = {
                 min: { type: 'number', optional: true, convert: true },
                 max: { type: 'number', optional: true, convert: true },
                 step: { type: 'number', optional: true, convert: true },
+                cols: { type: 'number', optional: true, convert: true },
+                rows: { type: 'number', optional: true, convert: true },
             },
         },
         label: {
@@ -206,6 +209,16 @@ export const controlSchema = {
                     },
                 },
             },
+        },
+        onChangeResets: {
+            type: 'object',
+            optional: true,
+            default: {},
+        },
+        creationMethod: {
+            type: 'string',
+            optional: true,
+            default: 'normal',
         },
     },
 };

@@ -16,6 +16,12 @@
 
   $: {
     type = control.attributes.type;
+
+    // do not have required in hidden fields
+    if (type == "hidden") {
+      // https://radu.link/fix-invalid-form-control-not-focusable/
+      delete control.attributes.required;
+    }
   }
 
   //   $: console.log(JSON.stringify(control, 0, 4));
@@ -32,7 +38,6 @@
           value={option.value || option}
           on:change={onChange}
           on:keyup={onChange}
-          
         />
 
         <Label
