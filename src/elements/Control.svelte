@@ -12,6 +12,7 @@
   import Select from "./controls/Select.svelte";
   import Textarea from "./controls/Textarea.svelte";
   import { formInputTypes } from "../lib/utils";
+  import { currentControl } from "../lib/store";
 
   export let control;
   export let idx;
@@ -40,12 +41,17 @@
 
     control.attributes.value = value;
     validateValue(control, idx);
+
+    currentControl.update((o) => control);
+
   }
 
   // run onChange if there is a value passed on creation
   onMount(function () {
     if (control.attributes && ("value" in control.attributes || control.attributes.required)) {
-      onChange(null, control.attributes.value);
+      setTimeout(() => {
+        onChange(null, control.attributes.value);
+      }, 1);
     }
   });
 </script>

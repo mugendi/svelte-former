@@ -7,5 +7,6 @@
 
 import { writable } from 'svelte/store';
 
+export const currentControl = writable({});
 export const Errors = writable({});
 export const Values = writable({});

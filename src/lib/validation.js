@@ -11,17 +11,17 @@ import { merge } from './merge';
 import { clone, labelText, formInputTypes } from './utils';
 
 export const v = new Validator({
-  messages: {
-    // Register our new error message text
-    color: "The '{field}' field must be an even number! Actual: {actual}",
-    month: "The '{field}' field must be a valid month! Actual: {actual}",
-    time: "The '{field}' field must be a valid time! Actual: {actual}",
-  },
+    messages: {
+        // Register our new error message text
+        color: "The '{field}' field must be an even number! Actual: {actual}",
+        month: "The '{field}' field must be a valid month! Actual: {actual}",
+        time: "The '{field}' field must be a valid time! Actual: {actual}",
+    },
 });
 
 v.add('color', function ({ schema, messages }, path, context) {
-  return {
-    source: `
+    return {
+        source: `
             function isColor(strColor) {
                 const s = new Option().style;
                 s.color = strColor;
@@ -33,12 +33,12 @@ v.add('color', function ({ schema, messages }, path, context) {
 
             return value;
         `,
-  };
+    };
 });
 
 v.add('month', function ({ schema, messages }, path, context) {
-  return {
-    source: `        
+    return {
+        source: `        
         let months = [], d, s;
 
         for (let i = 0; i <= 11; i++) {
@@ -60,12 +60,12 @@ v.add('month', function ({ schema, messages }, path, context) {
         }
 
         return value;`,
-  };
+    };
 });
 
 v.add('time', function ({ schema, messages }, path, context) {
-  return {
-    source: `        
+    return {
+        source: `        
         function isTime(str) {
 
             let numPat = /^[0-9]+$/;
@@ -102,163 +102,195 @@ v.add('time', function ({ schema, messages }, path, context) {
         }
 
         return value;`,
-  };
+    };
 });
 
 export const validationTypes = {
-  date: 'date',
-  'datetime-local': 'date',
-  email: 'email',
-  number: 'number',
-  url: 'url',
-  password: 'string',
-  text: 'string',
-  color: 'color',
-  month: 'month',
-  time: 'time',
-  // button: "",
-  // checkbox: "",
-  // file: "",
-  // hidden: "",
-  // image: "",
-  // radio: "",
-  // range: "",
-  // reset: "",
-  // search: "",
-  // submit: "",
-  // tel: "",
-  // week: "",
+    date: 'date',
+    'datetime-local': 'date',
+    email: 'email',
+    number: 'number',
+    url: 'url',
+    password: 'string',
+    text: 'string',
+    color: 'color',
+    month: 'month',
+    time: 'time',
+    // button: "",
+    // checkbox: "",
+    // file: "",
+    // hidden: "",
+    // image: "",
+    // radio: "",
+    // range: "",
+    // reset: "",
+    // search: "",
+    // submit: "",
+    // tel: "",
+    // week: "",
 };
 
 function validate(val, schema, errorPrefix = '', throwError = true) {
-  const check = v.compile(schema);
-  const isValid = check(val);
+    const check = v.compile(schema);
+    const isValid = check(val);
 
-  if (isValid !== true) {
-    let message =
-      '\n' + errorPrefix + isValid.map((o) => o.message).join('\n\t');
-    if (throwError) {
-      throw new Error(message);
+    if (isValid !== true) {
+        let message =
+            '\n' + errorPrefix + isValid.map((o) => o.message).join('\n\t');
+        if (throwError) {
+            throw new Error(message);
+        }
+
+        return message;
+    } else {
+        return null;
     }
-
-    return message;
-  } else {
-    return null;
-  }
 }
 
-export function validateControls(controls) {
-  let inputNames = {};
-  let inputIds = {};
-  let control;
-
-  for (let i in controls) {
-    i = Number(i);
-
-    control = controls[i];
-
+export function validateControl(control) {
     let schema = clone(controlSchema);
     // radio & select boxes must have an options key
     if (
-      control.element == 'select' ||
-      (control.element == 'input' && control.attributes.type == 'radio')
+        control.element == 'select' ||
+        (control.element == 'input' && control.attributes.type == 'radio')
     ) {
-      schema.props.options.optional = false;
+        schema.props.options.optional = false;
     }
 
     // hidden fields must have a value attr
     if (control.element == 'input' && control.attributes.type == 'hidden') {
-      schema.props.attributes.value = 'any';
+        schema.props.attributes.value = 'any';
     }
 
     // if not control,
     // name name attribute optional
     // make content a must
     if (formInputTypes.indexOf(control.element) == -1) {
-      schema.props.attributes.optional = true;
-      schema.props.attributes.props.name.optional = true;
-      schema.props.content.optional = false;
+        schema.props.attributes.optional = true;
+        schema.props.attributes.props.name.optional = true;
+        schema.props.content.optional = false;
     }
-
     // validate
-    validate(control, schema, 'Control[' + (i + 1) + '] ');
+    validate(control, schema, 'Control[' + control.idx + '] ');
+    return schema;
+}
 
-    if (!control.attributes) {
-      continue;
+export function validateControls(controls) {
+    let inputNames = {};
+    let inputIds = {};
+    let control;
+
+    for (let i in controls) {
+        i = Number(i);
+
+        control = controls[i];
+
+        // validate
+        validateControl(control);
+
+        if (!control.attributes) {
+            continue;
+        }
+
+        // ensure unique names
+        if (control.attributes.name in inputNames) {
+            throw new Error(
+                'Control[' +
+                    (i + 1) +
+                    '] attributes.name "' +
+                    control.attributes.name +
+                    '" has already been used with Control[' +
+                    (inputNames[control.attributes.name] + 1) +
+                    ']'
+            );
+        }
+
+        inputNames[control.attributes.name] = i;
+
+        if ('id' in control.attributes && control.attributes.id in inputIds) {
+            throw new Error(
+                'Control[' +
+                    (i + 1) +
+                    '] attributes.id "' +
+                    control.attributes.id +
+                    '" has already been used with Control[' +
+                    (inputIds[control.attributes.id] + 1) +
+                    ']'
+            );
+        }
+
+        inputIds[control.attributes.id] = i;
+
+        // add id attribute if missing
+        if ('id' in control.attributes === false) {
+            control.attributes.id =
+                'control-' + control.element + '-' + (i + 1);
+        }
     }
 
-    // ensure unique names
-    if (control.attributes.name in inputNames) {
-      throw new Error(
-        'Control[' +
-          (i + 1) +
-          '] attributes.name "' +
-          control.attributes.name +
-          '" has already been used with Control[' +
-          (inputNames[control.attributes.name] + 1) +
-          ']'
-      );
-    }
+    inputNames = null;
+    inputIds = null;
+    control = null;
 
-    inputNames[control.attributes.name] = i;
-
-    if ('id' in control.attributes && control.attributes.id in inputIds) {
-      throw new Error(
-        'Control[' +
-          (i + 1) +
-          '] attributes.id "' +
-          control.attributes.id +
-          '" has already been used with Control[' +
-          (inputIds[control.attributes.id] + 1) +
-          ']'
-      );
-    }
-
-    inputIds[control.attributes.id] = i;
-
-    // add id attribute if missing
-    if ('id' in control.attributes === false) {
-      control.attributes.id = 'control-' + control.element + '-' + (i + 1);
-    }
-  }
-
-  inputNames = null;
-  inputIds = null;
-  control = null;
-
-  return controls;
+    return controls;
 }
 
 export function validateValue(control) {
-  let label = labelText(control);
-  let valueSchema = {
-    type: 'string',
-    label,
-    optional: true,
-    convert: true,
-  };
+    let label = labelText(control);
+    let valueSchema = {
+        type: 'string',
+        label,
+        optional: true,
+        convert: true,
+    };
 
-  if ('validation' in control) {
-    valueSchema = merge(valueSchema, control.validation);
-  } else {
-    // if required
-    if (control.attributes.required) {
-      valueSchema.type = validationTypes[control.attributes.type] || 'string';
-      valueSchema.optional = false;
+    if ('validation' in control) {
+        valueSchema = merge(valueSchema, control.validation);
+    } else {
+        // if required
+        if (control.attributes.required) {
+            valueSchema.type =
+                validationTypes[control.attributes.type] || 'string';
+            valueSchema.optional = false;
+        }
     }
-  }
 
-  let schema = {
-    value: valueSchema,
-  };
+    // if min i set
+    if ('min' in control.attributes) {
+        valueSchema.min = control.attributes.min;
+    }
+    // if max is set
+    if ('max' in control.attributes) {
+        valueSchema.max = control.attributes.max;
+    }
+    // if minlength i set
+    if ('minlength' in control.attributes) {
+        valueSchema.min = control.attributes.minlength;
+    }
+    // if maxlength is set
+    if ('maxlength' in control.attributes) {
+        valueSchema.max = control.attributes.maxlength;
+    }
 
-  // validate
-  let obj = { value: control.attributes.value };
-  let error = validate(obj, schema, '', false);
+    // if pattern is set
+    if ('pattern' in control.attributes) {
+        valueSchema.pattern = new RegExp(control.attributes.pattern);
+    }
 
-  control.attributes.value = obj.value;
-  control.error = error;
 
-  // console.log(JSON.stringify(schema, 0, 4));
-  // console.log(JSON.stringify(error, 0, 4));
+    console.log(JSON.stringify(valueSchema,0,4));
+
+    let schema = {
+        value: valueSchema,
+    };
+
+    // validate
+    let obj = { value: control.attributes.value };
+    let error = validate(obj, schema, '', false);
+
+    control.attributes.value = obj.value;
+    control.error = error;
+
+    // console.log(JSON.stringify(schema, 0, 4));
+    // console.log(JSON.stringify(error, 0, 4));
 }

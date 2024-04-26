@@ -10,9 +10,10 @@
   import "./styles/form.scss";
 
   import Control from "./elements/Control.svelte";
-  import { validateControls } from "./lib/validation.js";
-  import { Errors, Values } from "./lib/store";
+  import { validateControl, validateControls } from "./lib/validation.js";
+  import { Errors, Values, currentControl } from "./lib/store";
   import { onMount } from "svelte";
+  import { merge } from "./lib/merge";
 
   export let controls = [];
   export let method = "POST";
@@ -21,11 +22,19 @@
 
   let isReady = false;
 
-  $: {
+  formatControls();
+
+  $: if ($currentControl) {
+    propagateOnChange($currentControl);
+  }
+
+  function formatControls() {
     let errors = {};
     let values = {};
 
     for (let i in controls) {
+      controls[i].idx = Number(i) + 1;
+
       if ("error" in controls[i] && controls[i].error) {
         errors[controls[i].attributes.name] = controls[i].error;
       }
@@ -43,9 +52,62 @@
     // console.log(JSON.stringify(errors, 0, 4));
   }
 
-  $: {
-    console.log($Errors);
-    console.log($Values);
+  async function propagateOnChange(control) {
+    if ("onChange" in control === false) {
+      return;
+    }
+
+    let onChangeObj;
+    let setValue;
+    let newControl;
+
+    for (let i in control.onChange) {
+      onChangeObj = control.onChange[i];
+
+      // check value if set
+      if ("value" in onChangeObj && control.attributes.value !== onChangeObj.value) {
+        continue;
+      }
+      // console.log(onChangeObj);
+
+      if (typeof onChangeObj.set == "function") {
+        setValue = await onChangeObj.set();
+      } else {
+        setValue = await onChangeObj.set;
+      }
+
+      if (typeof setValue == "object") {
+        // loop through all the names returned by set
+        for (let name in setValue) {
+          // find control with name
+          for (let i in controls) {
+            if ("attributes" in controls[i] === false || name !== controls[i].attributes.name) {
+              continue;
+            }
+
+            newControl = merge(
+              controls[i],
+              setValue[name],
+              // do not change some values such as element & attributes.type
+              {
+                element: controls[i].element,
+                attributes: {
+                  id: controls[i].attributes.id,
+                  name: controls[i].attributes.name,
+                  type: controls[i].attributes.type,
+                },
+              }
+            );
+
+            // console.log(JSON.stringify(newControl,0,4));
+            // validate
+            validateControl(newControl);
+            // assign value
+            controls[i] = newControl;
+          }
+        }
+      }
+    }
   }
 
   function submitForm(e) {
