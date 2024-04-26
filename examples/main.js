@@ -60,15 +60,29 @@ let controls = [
         classes: ['col-sm-12', 'col-md-6'],
         onChange: [
             {
-                value: 'Radio 1',
-                set: function () {
-                    return {
-                        sss: {
+                set: function (value) {
+                    // console.log(this);
+                    // console.log({ value });
+                    let opts = { options: [] };
+
+                    if (value == 'Radio 1') {
+                        opts = {
                             options: [1, 5, 6, 7],
                             attributes: {
                                 placeholder: 'Select Number',
                             },
-                        },
+                        };
+                    } else if (value == 'Radio 2') {
+                        opts = {
+                            options: [100, 200, 300, 400],
+                            attributes: {
+                                placeholder: 'Select Number',
+                            },
+                        };
+                    }
+
+                    return {
+                        sss: opts,
                     };
                 },
             },

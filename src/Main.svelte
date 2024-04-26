@@ -67,7 +67,7 @@
         onChangeObj = control.onChange[i];
 
         if (typeof onChangeObj.set == "function") {
-          setValue = await onChangeObj.set();
+          setValue = await onChangeObj.set.bind(control)(control.attributes.value);
         } else {
           setValue = await onChangeObj.set;
         }
@@ -83,9 +83,14 @@
                 continue;
               }
 
+              if (controls[i].creationMethod == "dynamic" && control.onChangeResets[name]) {
+                controls[i] = control.onChangeResets[name];
+                controls[i].creationMethod == "reset";
+              }
+
               // check value if set
               if ("value" in onChangeObj && control.attributes.value !== onChangeObj.value) {
-                newControl = control.onChangeResets[name];
+                continue;
               } else {
                 // console.log(onChangeObj);
 
@@ -106,9 +111,7 @@
                     creationMethod: "dynamic",
                   }
                 );
-              }
 
-              if (newControl) {
                 // validate
                 validateControl(newControl);
                 // assign value
