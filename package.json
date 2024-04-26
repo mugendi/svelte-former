@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
-    "git-commit":"git add build/ && git commit -m 'build'",
+    "git-commit":"git add build/ ",
     "pre-build": "run-s build git-commit"
   },
   "pre-commit": [
