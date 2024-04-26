@@ -7,10 +7,16 @@
     "dist"
   ],
   "type": "module",
-  "main": "./src/index.js",
+  "browser": "build/svelte-former.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": ""
   },
+  "pre-commit": [
+    "build"
+  ],
   "keywords": [
     "svelte",
     "form",
@@ -20,18 +26,30 @@
   "author": "Anthony Mugendi <ngurumugz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "fastest-validator": "^1.18.0",
-    "svelte": "^4.2.13"
+    "fastest-validator": "^1.18.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "pre-commit": "^1.2.2",
     "rollup": "^4.16.4",
     "rollup-plugin-reloadsite": "^1.0.4",
     "rollup-plugin-serve": "^1.1.1",
     "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-svelte": "^7.2.0",
-    "sass": "^1.75.0"
+    "sass": "^1.75.0",
+    "svelte": "^4.2.15"
   },
-  "repository": "https://github.com/mugendi/svelte-former.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mugendi/svelte-former.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mugendi/svelte-former/issues"
+  },
+  "homepage": "https://github.com/mugendi/svelte-former#readme",
+  "directories": {
+    "example": "examples"
+  }
 }
