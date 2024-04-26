@@ -12,11 +12,11 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
-    "git-commit":"git add build/ ",
-    "pre-build": "run-s build git-commit"
+    "git-add-build":"git add build/"
   },
   "pre-commit": [
-    "pre-build"
+    "build",
+    "git-add-build"
   ],
   "keywords": [
     "svelte",
