@@ -16,6 +16,7 @@
   let editor;
   const event = new Event("change");
 
+  //   remove required to prevent focusable error
   if (control && control.attributes && control.attributes.required) {
     delete control.attributes.required;
   }
