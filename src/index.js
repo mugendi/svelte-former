@@ -5,6 +5,5 @@
  * https://opensource.org/licenses/MIT
  */
 
-console.log('test');
 
-export { default } from './Main.svelte';
+export { default  } from './Main.svelte';

@@ -19,13 +19,24 @@
   export let method = "POST";
   export let action = "";
   export let failOnError = true;
+  export let onSubmit =function onSubmit(e) {
+    if (failOnError && hasErrors()) {
+      e.preventDefault();
+    }
+  }
 
   let isReady = false;
+  let values = {};
 
   formatControls();
 
   $: if ($currentControl) {
     propagateOnChange($currentControl);
+
+    if ($currentControl && $currentControl.attributes) {
+      values[$currentControl.attributes.name] = $currentControl.attributes.value;
+      Values.update((o) => values);
+    }
   }
 
   function formatControls() {
@@ -127,11 +138,7 @@
     }
   }
 
-  function submitForm(e) {
-    if (failOnError && hasErrors()) {
-      e.preventDefault();
-    }
-  }
+ 
 
   function hasErrors() {
     return Object.keys($Errors).length > 0;
@@ -141,11 +148,12 @@
     validateControls(controls);
     isReady = true;
   });
+
 </script>
 
 {#if isReady}
   <div class="former">
-    <form class="container-fluid" on:submit={submitForm} {action} {method}>
+    <form class="container-fluid" on:submit={onSubmit} {action} {method}>
       <div class="row">
         {#each controls as control, i}
           <Control bind:control idx={i + 1} />

@@ -109,7 +109,7 @@ let controls = [
         },
     },
     {
-        element: 'textarea',
+        element: 'richtext',
         attributes: {
             name: 'txt',
             required: true,
@@ -136,7 +136,9 @@ let controls = [
     },
 ];
 
-console.log(">>>>");
+
+
+
 let s = new SvelteFormer({
     target: document.body,
     props: {
@@ -147,4 +149,6 @@ let s = new SvelteFormer({
         method: 'post',
     },
 });
-// console.log(s);
+
+
+

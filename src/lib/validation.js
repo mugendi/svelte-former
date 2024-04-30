@@ -131,6 +131,7 @@ export const validationTypes = {
 };
 
 function validate(val, schema, errorPrefix = '', throwError = true) {
+ 
     const check = v.compile(schema);
     const isValid = check(val);
 

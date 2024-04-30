@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
-    "git-add-build":"git add build/"
+    "git-add-build": "git add build/"
   },
   "pre-commit": [
     "build",
@@ -27,7 +27,8 @@
   "author": "Anthony Mugendi <ngurumugz@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "fastest-validator": "^1.18.0"
+    "fastest-validator": "^1.18.0",
+    "rollup-plugin-styles": "^4.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -38,7 +39,6 @@
     "rollup": "^4.16.4",
     "rollup-plugin-reloadsite": "^1.0.4",
     "rollup-plugin-serve": "^1.1.1",
-    "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-svelte": "^7.2.0",
     "sass": "^1.75.0",
     "svelte": "^4.2.15"

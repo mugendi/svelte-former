@@ -13,6 +13,7 @@
   import Textarea from "./controls/Textarea.svelte";
   import { formInputTypes } from "../lib/utils";
   import { currentControl } from "../lib/store";
+  import RichText from "./controls/RichText.svelte";
 
   export let control;
 
@@ -30,31 +31,35 @@
     }
   }
 
+  let timeoutInt;
+
   function onChange(e, val, element) {
     let value;
 
-    if (e) {
-      let el = e.target;
-      element = el.tagName.toLowerCase();
+    clearTimeout(timeoutInt);
 
-      type = el.type;
+    timeoutInt = setTimeout(() => {
+      // console.log({e, val, element});
+      if (e) {
+        let el = e.target;
+        element = el.tagName.toLowerCase();
 
-      if (el.type == "checkbox") {
-        value = el.checked;
+        type = el.type;
+
+        if (el.type == "checkbox") {
+          value = el.checked;
+        } else {
+          value = el.value;
+        }
       } else {
-        value = el.value;
+        type = control.attributes.type;
+        value = val;
       }
-    } else {
-      type = control.attributes.type
-      value = val;
-    }
 
-
-    control.attributes.value = value;
-
-    validateValue(control);
-
-    currentControl.update((o) => control);
+      control.attributes.value = value;
+      validateValue(control);
+      currentControl.update((o) => control);
+    }, 250);
   }
 
   // run onChange if there is a value passed on creation
@@ -75,6 +80,8 @@
       <Select bind:control {onChange} />
     {:else if control.element == "textarea"}
       <Textarea bind:control {onChange} />
+    {:else if control.element == "richtext"}
+      <RichText bind:control {onChange} />
     {:else}
       <svelte:element this={control.element}>
         {@html control.content}

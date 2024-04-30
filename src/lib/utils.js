@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-export let formInputTypes = ['input', 'select', 'textarea'];
+export let formInputTypes = ['input', 'select', 'textarea', 'richtext'];
 
 const magicSplit =
   /^[a-zà-öø-ÿ]+|[A-ZÀ-ÖØ-ß][a-zà-öø-ÿ]+|[a-zà-öø-ÿ]+|[0-9]+|[A-ZÀ-ÖØ-ß]+(?![a-zà-öø-ÿ])/g;

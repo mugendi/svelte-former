@@ -14,6 +14,7 @@ export let elementSchema = {
         'input',
         'textarea',
         'select',
+        'richtext',
         'div',
         'hr',
         'br',
