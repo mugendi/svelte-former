@@ -113,6 +113,7 @@ let controls = [
         attributes: {
             name: 'txt',
             required: true,
+            value:"gser"
         },
         validation: {
             max: 50,

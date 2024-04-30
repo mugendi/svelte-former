@@ -19,11 +19,18 @@
   export let method = "POST";
   export let action = "";
   export let failOnError = true;
-  export let onSubmit =function onSubmit(e) {
+  export let onSubmit = function onSubmit(e) {
     if (failOnError && hasErrors()) {
       e.preventDefault();
     }
-  }
+  };
+
+  export let buttons = [{ text: "Submit" }];
+
+  buttons = buttons.map((o) => {
+    o.attributes = merge({ type: "submit", class: "button" }, o.attributes || {});
+    return o;
+  });
 
   let isReady = false;
   let values = {};
@@ -38,6 +45,8 @@
       Values.update((o) => values);
     }
   }
+
+
 
   function formatControls() {
     let errors = {};
@@ -138,8 +147,6 @@
     }
   }
 
- 
-
   function hasErrors() {
     return Object.keys($Errors).length > 0;
   }
@@ -148,7 +155,6 @@
     validateControls(controls);
     isReady = true;
   });
-
 </script>
 
 {#if isReady}
@@ -159,7 +165,9 @@
           <Control bind:control idx={i + 1} />
         {/each}
 
-        <button class="button">Submit</button>
+        {#each buttons as button}
+          <button {...button.attributes}>{button.text}</button>
+        {/each}
       </div>
     </form>
   </div>

@@ -16,8 +16,11 @@
   let editor;
   const event = new Event("change");
 
-  function init() {
+  if (control && control.attributes && control.attributes.required) {
+    delete control.attributes.required;
+  }
 
+  function init() {
     editor = SUNEDITOR.create(textareaEl, {
       //   codeMirror: CodeMirror,
       katex: katex,
@@ -218,7 +221,14 @@
     });
 
     editor.onChange = function (contents, core) {
-      textareaEl.value = contents;
+      contents = contents.replace("<p><br></p>", "");
+
+      if (!contents) {
+        textareaEl.value = null;
+      } else {
+        textareaEl.value = contents;
+      }
+
       // Dispatch it.
       textareaEl.dispatchEvent(event);
     };
@@ -236,7 +246,7 @@
     return new Promise((resolve) => setTimeout(resolve, time));
   }
 
-  //   $: console.log(JSON.stringify(control, 0, 4));
+  //   $: console.log(JSON.stringify(control.attributes, 0, 4));
 </script>
 
 <div class="label-container">
@@ -249,7 +259,6 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/suneditor@2.46.2/dist/css/suneditor.min.css"
   />
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/suneditor@2.46.2/dist/suneditor.min.js"></script>
