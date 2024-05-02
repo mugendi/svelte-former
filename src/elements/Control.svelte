@@ -87,7 +87,7 @@
 </script>
 
 <div class={control.classes.join(" ")}>
-  <div class="control-group{control.error ? ' has-error' : ''} {type || ' content'} ">
+  <div class="svlete-former-control-group{control.error ? ' has-error' : ''} {type || ' content'} ">
     {#if control.element == "input"}
       <Input bind:control {onChange} />
     {:else if control.element == "select"}

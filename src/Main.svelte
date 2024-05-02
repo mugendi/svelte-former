@@ -167,7 +167,7 @@
       </div>
 
       <div class="row">
-        <div class="control-buttons">
+        <div class="svlete-former-control-buttons">
           <Buttons {buttons} {formEl} />
         </div>
       </div>
