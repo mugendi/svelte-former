@@ -24,7 +24,7 @@
 
     // if is a form input and not other element
     if (formInputTypes.indexOf(control.element) > -1) {
-      type = control.attributes.type || control.element;
+      type = "type-" + control.attributes.type + " type-" + control.element;
     }
 
     if (control.creationMethod == "dynamic") {
@@ -87,7 +87,10 @@
 </script>
 
 <div class={control.classes.join(" ")}>
-  <div class="svlete-former-control-group{control.error ? ' has-error' : ''} type-{type || ' content'} ">
+  <div
+    class="svlete-former-control-group{control.error ? ' has-error' : ''} {type ||
+      ' content'} "
+  >
     {#if control.element == "input"}
       <Input bind:control {onChange} />
     {:else if control.element == "select"}
