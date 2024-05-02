@@ -22,11 +22,16 @@ pre {
   display: none;
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
-  font-size: calc(1.2vw) !important;
-}
 
 span.token {
   text-wrap: wrap;
+}
+
+
+@media only screen and (max-width: 600px) {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    font-size: 10px !important;
+  }
+  
 }
