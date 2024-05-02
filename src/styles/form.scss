@@ -6,35 +6,51 @@
  */
 
 .former {
-  .control-group {
+  .control-buttons {
     padding: 10px;
+    margin: 2px 0;
+  }
+  .control-group {
+    padding: 5px;
     border-radius: 10px;
-    border: 1px solid #f9f9f9;
+    border: 1px solid #fafafa;
     margin: 5px 0;
 
- 
     .label-container {
       display: flex;
       justify-content: space-between;
       align-items: end;
       margin-bottom: 5px;
-      label {
-        font-size: 1.2rem;
+
+      .radio, .checkbox{
+        text-wrap: nowrap;
+        margin-top: 5px;
+      }
+
+      .label {
+        font-size: 1rem;
         font-weight: 600;
-        margin-right: 10px;
+        margin-right: 5px;
         cursor: pointer;
+        text-wrap: nowrap;
+        &.small {
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+        &.pad-left{
+          padding-left: 5px;
+        }
       }
     }
-
 
     &:hover {
       background: #f9f9f9;
     }
 
-    &.hidden{
+    &.hidden {
       display: none;
     }
- 
+
     &.has-error {
       background: #fee;
       color: #922;
@@ -46,6 +62,9 @@
       .label-container {
         .error {
           font-size: 0.7rem;
+          text-wrap: wrap;
+          border-left: 1px #caa solid;
+          padding-left: 5px;
         }
       }
     }
@@ -62,7 +81,7 @@
       border: none;
       outline: none;
       box-sizing: border-box;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: #444;
       background: #fff;
       box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
@@ -97,47 +116,52 @@
     // element
   }
 
-  button {
-    background-color: #eee;
-    border-radius: 8px;
+  /* CSS */
+  .button {
+    background-image: linear-gradient(#f7f8face, #e7e9ec);
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, 0.6) 0 1px 0 inset;
     box-sizing: border-box;
-    color: #222222;
+    color: #0f1111;
     cursor: pointer;
     display: inline-block;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 20px;
-    margin: 0;
-    outline: none;
-    padding: 13px 23px;
-    position: relative;
+    font-family: 'Amazon Ember', Arial, sans-serif;
+    font-size: 14px;
+    height: 29px;
+    font-size: 13px;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 11px;
     text-align: center;
     text-decoration: none;
-    touch-action: manipulation;
-    transition: box-shadow 0.2s, -ms-transform 0.1s, -webkit-transform 0.1s,
-      transform 0.1s;
+    text-overflow: ellipsis;
     user-select: none;
     -webkit-user-select: none;
-    width: auto;
+    touch-action: manipulation;
+    white-space: nowrap;
 
-    &:hover,
-    &:active {
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-      filter: brightness(120%);
+    & + .button {
+      margin-left: 2px;
     }
 
-    &:disabled {
-      border-color: #dddddd;
-      color: #dddddd;
-      cursor: not-allowed;
-      opacity: 1;
+    &:hover,
+    &:active,
+    &:active:hover,
+    &:focus {
+      // background-image: linear-gradient(#e7effd, #e7e9ec);
+      border-color: #a2a6ac #979aa1 #82858a;
+      // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+      filter: brightness(103%);
     }
   }
 }
+
 @media (max-width: 575px) {
   .former {
     .control-group {
-
       &:hover {
         background: #f9f9f9;
       }

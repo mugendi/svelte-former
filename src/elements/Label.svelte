@@ -6,18 +6,19 @@
 -->
 
 <script>
-  import { labelText } from "../lib/utils.js";
-
+  import { merge } from "../lib/merge";
+  // import { labelText } from "../lib/utils";
   export let control;
-  export let label;
   export let id;
+  export let label;
+  export let cls = "label";
 
-  $: if (!label) {
-    label = labelText(control);
-  }
+  label = merge(typeof control.label == "object" ? control.label : {}, {
+    text: label || control.label.text || control.label,
+  });
+
 </script>
 
-
-<label for={id || control.attributes.id}>{@html label}</label>
-
-
+<label for={id || control.attributes.id} {...label.attributes} class={cls}>
+  {@html label.text || label}
+</label>

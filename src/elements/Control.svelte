@@ -12,7 +12,7 @@
   import Select from "./controls/Select.svelte";
   import Textarea from "./controls/Textarea.svelte";
   import { formInputTypes } from "../lib/utils";
-  import { currentControl } from "../lib/store";
+  import { Errors, currentControl } from "../lib/store";
   import RichText from "./controls/RichText.svelte";
 
   export let control;
@@ -20,6 +20,8 @@
   let type;
 
   $: if (control) {
+    control.required = control.required || (control.attributes.required ? true : false);
+
     // if is a form input and not other element
     if (formInputTypes.indexOf(control.element) > -1) {
       type = control.attributes.type || control.element;
@@ -59,16 +61,28 @@
       control.attributes.value = value;
       validateValue(control);
       currentControl.update((o) => control);
+
+      let errors = Object.assign({}, $Errors);
+
+      if (control.error) {
+        errors[control.attributes.name] = control.error;
+      } else {
+        delete errors[control.attributes.name];
+      }
+
+      //
+      Errors.update((o) => errors);
     }, 250);
   }
 
   // run onChange if there is a value passed on creation
   onMount(function () {
-    if (control.attributes && ("value" in control.attributes || control.attributes.required)) {
-      setTimeout(() => {
-        onChange(null, control.attributes.value, control.element);
-      }, 1);
-    }
+    // if (control.attributes && ("value" in control.attributes || control.attributes.required)) {
+    //  console.log(JSON.stringify(control,0,4));
+    setTimeout(() => {
+      onChange(null, control.attributes.value, control.element);
+    }, 1);
+    // }
   });
 </script>
 
@@ -83,7 +97,7 @@
     {:else if control.element == "richtext"}
       <RichText bind:control {onChange} />
     {:else}
-      <svelte:element this={control.element}>
+      <svelte:element this={control.element} bind:this={control.node}>
         {@html control.content}
       </svelte:element>
     {/if}

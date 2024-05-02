@@ -189,7 +189,7 @@ export const controlSchema = {
                 ],
             },
         },
-        checked: { type: 'boolean', optional: true },
+        // checked: { type: 'boolean', optional: true },
         content: { type: 'string', optional: true },
         classes: {
             type: 'array',

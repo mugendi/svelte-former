@@ -14,6 +14,7 @@
   import { Errors, Values, currentControl } from "./lib/store";
   import { onMount } from "svelte";
   import { merge } from "./lib/merge";
+  import Buttons from "./elements/Buttons.svelte";
 
   export let controls = [];
   export let method = "POST";
@@ -25,15 +26,11 @@
     }
   };
 
-  export let buttons = [{ text: "Submit" }];
-
-  buttons = buttons.map((o) => {
-    o.attributes = merge({ type: "submit", class: "button" }, o.attributes || {});
-    return o;
-  });
+  export let buttons = [];
 
   let isReady = false;
   let values = {};
+  let formEl;
 
   formatControls();
 
@@ -45,8 +42,6 @@
       Values.update((o) => values);
     }
   }
-
-
 
   function formatControls() {
     let errors = {};
@@ -82,15 +77,19 @@
       let setValue;
 
       // control.onChangeResets = control.onChangeResets || {};
-
+      
       for (let i in control.onChange) {
         onChangeObj = control.onChange[i];
 
         if (typeof onChangeObj.set == "function") {
-          setValue = await onChangeObj.set.bind(control)(control.attributes.value);
+          await onChangeObj.set.bind(control)(control.attributes.value, update);
         } else {
-          setValue = await onChangeObj.set;
+          update(onChangeObj.set);
         }
+      }
+
+      function update(data) {
+        setValue = data;
 
         if (typeof setValue == "object") {
           // loop through all the names returned by set
@@ -142,6 +141,7 @@
           }
         }
       }
+
     } catch (error) {
       throw error;
     }
@@ -159,15 +159,17 @@
 
 {#if isReady}
   <div class="former">
-    <form class="container-fluid" on:submit={onSubmit} {action} {method}>
+    <form class="container-fluid" on:submit={onSubmit} {action} {method} bind:this={formEl}>
       <div class="row">
         {#each controls as control, i}
           <Control bind:control idx={i + 1} />
         {/each}
+      </div>
 
-        {#each buttons as button}
-          <button {...button.attributes}>{button.text}</button>
-        {/each}
+      <div class="row">
+        <div class="control-buttons">
+          <Buttons {buttons} {formEl} />
+        </div>
       </div>
     </form>
   </div>

@@ -1,0 +1,46 @@
+/**
+ * Copyright (c) 2024 Anthony Mugendi
+ * 
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+#container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#submit-data {
+  margin-top: 10px;
+}
+
+.column {
+  width: 54.5%;
+}
+.column + .column {
+  width: 45%;
+}
+
+.border {
+  border: 1px solid #eee;
+  padding: 10px;
+}
+
+pre {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+h4 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  margin: 2px 0 10px;
+  color: #666;
+}
+
+span.token {
+  text-wrap: wrap;
+}

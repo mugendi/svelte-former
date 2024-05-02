@@ -13,6 +13,7 @@
   export let onChange;
 
   let type;
+  let optionValue;
 
   $: {
     type = control.attributes.type;
@@ -31,31 +32,43 @@
 {#if type == "radio"}
   <div class="label-container">
     <div>
-      {#each control.options as option, i}
-        <input
-          {...control.attributes}
-          id={control.attributes.id + "-" + (i + 1)}
-          value={option.value || option}
-          on:change={onChange}
-          on:keyup={onChange}
-        />
+      <Label bind:control cls="label pad-left"/>
 
-        <Label
-          bind:control
-          label={option.text || option}
-          id={control.attributes.id + "-" + (i + 1)}
-        />
-      {/each}
+      <div class="radio" bind:this={control.node}>
+        {#each control.options as option, i}
+          {(optionValue = option.value || option) && ""}
+
+          <input
+            {...control.attributes}
+            id={control.attributes.id + "-" + (i + 1)}
+            value={optionValue}
+            checked={optionValue == control.attributes.value}
+            on:change={onChange}
+            on:keyup={onChange}
+          />
+
+          <Label
+            bind:control
+            label={option.text || option}
+            id={control.attributes.id + "-" + (i + 1)}
+            cls="label small"
+          />
+        {/each}
+      </div>
     </div>
-
     <Error bind:control />
   </div>
 
   <!-- Check Boxes -->
 {:else if type == "checkbox"}
   <div class="label-container">
-    <div>
-      <input {...control.attributes} on:change={onChange} on:keyup={onChange} />
+    <div class="checkbox">
+      <input
+        {...control.attributes}
+        on:change={onChange}
+        on:keyup={onChange}
+        bind:this={control.node}
+      />
 
       <Label bind:control />
     </div>
@@ -63,11 +76,21 @@
     <Error bind:control />
   </div>
 {:else if type == "hidden"}
-  <input {...control.attributes} on:change={onChange} on:keyup={onChange} />
+  <input
+    {...control.attributes}
+    on:change={onChange}
+    on:keyup={onChange}
+    bind:this={control.node}
+  />
 {:else}
   <div class="label-container">
     <Label bind:control />
     <Error bind:control />
   </div>
-  <input {...control.attributes} on:change={onChange} on:keyup={onChange} />
+  <input
+    {...control.attributes}
+    on:change={onChange}
+    on:keyup={onChange}
+    bind:this={control.node}
+  />
 {/if}

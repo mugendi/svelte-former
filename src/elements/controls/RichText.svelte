@@ -17,6 +17,7 @@
   const event = new Event("change");
 
   //   remove required to prevent focusable error
+
   if (control && control.attributes && control.attributes.required) {
     delete control.attributes.required;
   }
@@ -265,4 +266,11 @@
   <script src="https://cdn.jsdelivr.net/npm/suneditor@2.46.2/dist/suneditor.min.js"></script>
 </svelte:head>
 
-<textarea bind:this={textareaEl} {...control.attributes} on:change={onChange} on:keyup={onChange} />
+<div bind:this={control.node}>
+  <textarea
+    bind:this={textareaEl}
+    {...control.attributes}
+    on:change={onChange}
+    on:keyup={onChange}
+  />
+</div>

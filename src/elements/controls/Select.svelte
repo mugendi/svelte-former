@@ -29,6 +29,7 @@
   {...control.attributes}
   on:change={onChange}
   placeholder={control.attributes.value ? null : control.attributes.placeholder}
+  bind:this={control.node} 
 >
   {#if control.attributes.placeholder}
     <option value={null} selected disabled>{control.attributes.placeholder}</option>
