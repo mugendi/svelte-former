@@ -259,11 +259,11 @@
 <svelte:head>
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/suneditor@2.46.2/dist/css/suneditor.min.css"
+    href="https://cdn.statically.io/gh/JiHong88/suneditor/master/dist/css/suneditor.min.css"
   />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/suneditor@2.46.2/dist/suneditor.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script src="https://cdn.statically.io/gh/JiHong88/suneditor/master/dist/suneditor.min.js"></script>
 </svelte:head>
 
 <div bind:this={control.node}>
