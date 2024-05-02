@@ -24,7 +24,7 @@ pre {
 
 code[class*='language-'],
 pre[class*='language-'] {
-  font-size: calc(1.2vw );
+  font-size: calc(1.2vw) !important;
 }
 
 span.token {
