@@ -5,20 +5,8 @@
  * https://opensource.org/licenses/MIT
  */
 
-#container {
-  display: flex;
-  justify-content: space-between;
-}
-
 #submit-data {
   margin-top: 10px;
-}
-
-.column {
-  width: 54.5%;
-}
-.column + .column {
-  width: 45%;
 }
 
 .border {
@@ -27,18 +15,16 @@
 }
 
 pre {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .hidden {
   display: none;
 }
 
-h4 {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
-  margin: 2px 0 10px;
-  color: #666;
+code[class*='language-'],
+pre[class*='language-'] {
+  font-size: calc(1.2vw );
 }
 
 span.token {

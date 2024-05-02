@@ -11,42 +11,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic Elements</title>
-    <link rel="stylesheet" href="/examples/css/examples.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.statically.io/gh/jgthms/bulma/main/css/bulma.min.css"
+    />
+
     <link rel="stylesheet" href="/examples/css/javascript-theme.css" />
     <link rel="stylesheet" href="/examples/css/json-theme.css" />
+    <link rel="stylesheet" href="/examples/css/examples.css" />
   </head>
   <body>
-    <div id="container">
-      <div class="column">
+    <section class="section p-2">
+      <div id="container-container">
+        <div class="columns">
+          <div class="column">
+            <div class="border">
+              <h4>Form</h4>
+              <div id="form"></div>
+            </div>
 
-        <div class="border">
-          <h4>Form</h4>
-          <div id="form"></div>
-        </div>
-        
-        <div id="submit-data" class="border">
-          <h4>Response</h4>
-          <pre class="language-json"><code class="language-json">
+            <div id="submit-data" class="border">
+              <h4>Response</h4>
+              <pre class="language-json"><code class="language-json">
             // Press "Submit" above to show response
           </code></pre>
-        </div>
-      </div>
-      <div class="column">
-        <div class="border">
-          <h4>Code</h4>
-          <div id="code" class="line-numbers">
-            <pre><code  class="language-javascript"></code></pre>
+            </div>
+          </div>
+          <div class="column">
+            <div class="border">
+              <h4>Code</h4>
+              <div id="code" class="line-numbers">
+                <pre><code  class="language-javascript"></code></pre>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </body>
 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"></script>
 
   <script src="../build/svelte-former.js"></script>
-  <script src="/examples/js/examples/basic.js"></script> 
+  <script src="/examples/js/examples/basic.js"></script>
   <script src="/examples/js/code.js"></script>
-
 </html>
