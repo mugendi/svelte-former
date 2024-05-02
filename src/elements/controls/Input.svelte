@@ -34,7 +34,7 @@
     <div>
       <Label bind:control cls="label pad-left"/>
 
-      <div class="radio" bind:this={control.node}>
+      <div class="radio-control" bind:this={control.node}>
         {#each control.options as option, i}
           {(optionValue = option.value || option) && ""}
 
@@ -62,7 +62,7 @@
   <!-- Check Boxes -->
 {:else if type == "checkbox"}
   <div class="label-container">
-    <div class="checkbox">
+    <div class="checkbox-control">
       <input
         {...control.attributes}
         on:change={onChange}
