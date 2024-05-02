@@ -11,7 +11,7 @@
   export let control;
   export let id;
   export let label;
-  export let cls = "label";
+  export let cls = "svelte-former-label";
 
   label = merge(typeof control.label == "object" ? control.label : {}, {
     text: label || control.label.text || control.label,

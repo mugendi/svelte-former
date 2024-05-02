@@ -32,7 +32,7 @@
 {#if type == "radio"}
   <div class="label-container">
     <div>
-      <Label bind:control cls="label pad-left"/>
+      <Label bind:control cls="svelte-former-label pad-left"/>
 
       <div class="radio-control" bind:this={control.node}>
         {#each control.options as option, i}
@@ -51,7 +51,7 @@
             bind:control
             label={option.text || option}
             id={control.attributes.id + "-" + (i + 1)}
-            cls="label small"
+            cls="svelte-former-label small"
           />
         {/each}
       </div>
