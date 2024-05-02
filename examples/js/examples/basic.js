@@ -116,21 +116,28 @@ let controls = [
             },
           });
 
+          let data = { country: value };
+
           // Fetch cities of that country from api
-          let { data } = await scriptin.ajax
-            .post('https://countriesnow.space/api/v0.1/countries/cities', {
-              country: value,
-            })
-            .then((resp) => {
-              return JSON.parse(resp.data);
-            });
+          let response = await fetch(
+            'https://countriesnow.space/api/v0.1/countries/cities',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            }
+          );
+
+          let json = await response.json();
 
           // console.log(data);
           update({
             // update the city control
             city: {
               // set cities in options
-              options: data,
+              options: json.data,
               // enable any other attributes
               attributes: {
                 disabled: false,
@@ -201,10 +208,9 @@ let buttons = [
       let submitEl = document.querySelector('#submit-data');
       let dataEl = submitEl.querySelector('code');
 
-
       // delete submitData.
       const html = Prism.highlight(
-        JSON.stringify({errors, values}, 0, 4),
+        JSON.stringify({ errors, values }, 0, 4),
         Prism.languages.javascript,
         'javascript'
       );
