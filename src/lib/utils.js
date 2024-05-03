@@ -15,6 +15,8 @@ const magicSplit =
  * @returns the word with the first character in uppercase and the rest in lowercase
  */
 export function capitaliseWord(string) {
+  if(!string) return '';
+
   const match = string.matchAll(magicSplit).next().value;
   const firstLetterIndex = match ? match.index : 0;
   return (
