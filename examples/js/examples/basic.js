@@ -181,6 +181,8 @@ let controls = [
     },
   },
 
+  
+
   {
     element: 'input',
     attributes: {
@@ -203,20 +205,24 @@ let controls = [
     onChange: [
       {
         set: function (error, value, update) {
+          // if error or no value
           if (error || !value) {
             return;
           }
 
+          // update confirmPass control
           update({
             confirmPass: {
               attributes: { disabled: false },
               validation: {
                 // ensure passwords match
                 enum: [value],
-                message:'Passwords do not match!'
+                // custom error message
+                message: 'Passwords do not match!',
               },
             },
           });
+
         },
       },
     ],
@@ -228,12 +234,12 @@ let controls = [
       type: 'password',
       name: 'confirmPass',
       required: true,
+      // start with a disabled field
       disabled: true,
       autocomplete: 'off',
     },
     options: [],
     classes: ['col-sm-12', 'col-md-6'],
-   
     label: 'Repeat Password',
   },
 
