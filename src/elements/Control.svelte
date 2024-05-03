@@ -86,11 +86,10 @@
   });
 </script>
 
-<div class={control.classes.join(" ")}>
-  <div
-    class="svlete-former-control-group{control.error ? ' has-error' : ''} {type ||
-      ' content'} "
-  >
+<div
+  class="{control.classes.join(' ')} {control.attributes.type == 'hidden' ? 'svelte-former-hidden' : ''}"
+>
+  <div class="svlete-former-control-group{control.error ? ' svelte-former-has-error' : ''} {type || ' content'} ">
     {#if control.element == "input"}
       <Input bind:control {onChange} />
     {:else if control.element == "select"}
@@ -100,7 +99,7 @@
     {:else if control.element == "richtext"}
       <RichText bind:control {onChange} />
     {:else}
-      <svelte:element this={control.element} bind:this={control.node}>
+      <svelte:element this={control.element} bind:this={control.node} {...control.attributes}>
         {@html control.content}
       </svelte:element>
     {/if}

@@ -10,6 +10,11 @@
     padding: 10px;
     margin: 2px 0;
   }
+
+  .svelte-former-hidden {
+    display: none;
+  }
+
   .svlete-former-control-group {
     padding: 5px;
     border-radius: 10px;
@@ -27,10 +32,10 @@
         text-wrap: nowrap;
         margin-top: 5px;
 
-        .svelte-former-label, input {
+        .svelte-former-label,
+        input {
           display: inline-block;
         }
-        
       }
 
       .svelte-former-label {
@@ -53,13 +58,13 @@
       background: #f9f9f9;
     }
 
-    &.hidden {
-      display: none;
-    }
-
-    &.has-error {
+    &.svelte-former-has-error {
       background: #fee;
       color: #922;
+
+      * {
+        color: #922;
+      }
 
       &:hover {
         background: #fee;
