@@ -17,7 +17,7 @@ This is a [svelte](https://svelte.dev/) from component that handles:
 
 Since svelte is the [Magical disappearing framework](https://v2.svelte.dev/) that compiles into framework-less vanilla JavaScript, this component can also be used with ordinary JavaScript.
 
-- [Documentation](/docs/docs.md)
+- [Documentation](/docs)
 - [Demo](https://mugendi.github.io/docs/svelte-former/)
 
 ![Alt](https://repobeats.axiom.co/api/embed/83c6d10682a20b1614e5f64ab3c7a248babf15f1.svg "Repobeats analytics image")
