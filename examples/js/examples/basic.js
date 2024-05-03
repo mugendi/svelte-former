@@ -81,6 +81,13 @@ let controls = [
     // Radio Boxes can also be an array of strings
     options: ['Some College', 'University'],
   },
+  
+
+  {
+    element: "div",
+    content : "<h3>Dynamic Controls</h3>",
+    attributes: { value: "", class: "my-4" },
+  },
 
   // Dynamic Select Boxes
   {
