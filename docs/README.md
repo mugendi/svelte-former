@@ -61,7 +61,7 @@ First install with `yarn add svelte-former`.
 
 ```javascript
 
-import Former from 'svelte-former';
+import {Former} from 'svelte-former';
 
 // controls
 let controls = [...];
