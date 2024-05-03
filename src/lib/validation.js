@@ -171,7 +171,6 @@ export function validateControl(control) {
   if (formInputTypes.indexOf(control.element) == -1) {
     schema.props.attributes.optional = true;
     schema.props.attributes.props.name.optional = true;
-    schema.props.content.optional = false;
   }
 
   // validate
