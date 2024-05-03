@@ -1,10 +1,3 @@
-<!--
- Copyright (c) 2024 Anthony Mugendi
- 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
--->
-
 # Svelte Former
 
 [![github-license](https://img.shields.io/github/license/mugendi/https://github.com/mugendi/svelte-former?style=social&logo=github)](https://github.com/mugendi/https://github.com/mugendi/svelte-former) [![github-stars](https://img.shields.io/github/stars/mugendi/svelte-former?style=social&logo=github)](https://github.com/mugendi/svelte-former) [![github-watchers](https://img.shields.io/github/watchers/mugendi/svelte-former?label=Watch&style=social&logo=github)](https://github.com/mugendi/svelte-former) [![github-forks](https://img.shields.io/github/forks/mugendi/svelte-former?label=Fork&style=social&logo=github)](https://github.com/mugendi/svelte-former) 
@@ -21,6 +14,7 @@ Since svelte is the [Magical disappearing framework](https://v2.svelte.dev/) tha
 - [Demo](https://mugendi.github.io/docs/svelte-former/)
 
 ![Alt](https://repobeats.axiom.co/api/embed/83c6d10682a20b1614e5f64ab3c7a248babf15f1.svg "Repobeats analytics image")
+
 
 # Why another form component?
 

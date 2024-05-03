@@ -23,7 +23,7 @@ let controls = [
 ];
 ```
 
-Each form control is an object with the following properties `element, attributes, label, validation, options, content, classes, onChange` [Read More](/docs/svelte-former/control) .
+Each form control is an object with the following properties `element, attributes, label, validation, options, content, classes, onChange` [Read More](/docs/svelte-former/controls.md) .
 
 
 ## Vanilla Javascript / HTML
