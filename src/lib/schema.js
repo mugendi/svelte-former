@@ -67,8 +67,8 @@ export const controlSchema = {
     element: elementSchema,
     attributes: {
       type: 'object',
-      optional:true,
-      default:{},
+      optional: true,
+      default: {},
       // https://www.dofactory.com/html/input-attributes
       props: {
         name: { type: 'string' },
@@ -83,6 +83,7 @@ export const controlSchema = {
           type: 'string',
           optional: true,
           enum: ['on', 'off'],
+          default: 'off',
         },
         form: { type: 'string', optional: true },
         formaction: { type: 'string', optional: true },
@@ -95,7 +96,6 @@ export const controlSchema = {
         list: { type: 'string', optional: true },
         dirname: { type: 'string', optional: true },
         lang: { type: 'string', optional: true },
-
         required: { type: 'boolean', optional: true, convert: true },
         readonly: { type: 'boolean', optional: true, convert: true },
         disabled: { type: 'boolean', optional: true, convert: true },
