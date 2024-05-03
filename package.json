@@ -1,6 +1,6 @@
 {
   "name": "svelte-former",
-  "version": "0.1.16",
+  "version": "1.0.0",
   "description": "Svelte Form Element with easy validation",
   "files": [
     "src",
