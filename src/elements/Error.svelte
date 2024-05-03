@@ -9,4 +9,4 @@
     export let control;
 </script>
 
-<div class="error">{@html control.error || ""}</div>
+<div class="svelte-former-error">{@html control.error || ""}</div>
