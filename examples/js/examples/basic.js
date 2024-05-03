@@ -98,10 +98,10 @@ let controls = [
     // dynamically affect other fields based on this field
     onChange: [
       {
-        set: async function (value, update) {
+        set: async function (error, value, update) {
           // console.log({ value });
           // Run only when a value is selected
-          if (!value) {
+          if (!value || error) {
             return;
           }
 
@@ -179,6 +179,62 @@ let controls = [
       // set a minimum number of characters
       min: 20,
     },
+  },
+
+  {
+    element: 'input',
+    attributes: {
+      type: 'password',
+      name: 'password',
+    },
+    classes: ['col-sm-12', 'col-md-6'],
+    validation: {
+      type: 'string',
+      // password should ne at least 6 characters
+      min: 6,
+      // check password strength. Regex from: https://stackoverflow.com/a/70924394/1462634
+      pattern:
+        /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*[\d|@#$!%*?&])[\p{L}\d@#$!%*?&]{6,}$/gmu,
+      // Custom error message
+      message:
+        ' <strong>Password too weak.</strong> Mix lowercase, uppercase, special characters and numbers',
+    },
+    label: 'Password',
+    onChange: [
+      {
+        set: function (error, value, update) {
+          if (error || !value) {
+            return;
+          }
+
+          update({
+            confirmPass: {
+              attributes: { disabled: false },
+              validation: {
+                // ensure passwords match
+                enum: [value],
+                message:'Passwords do not match!'
+              },
+            },
+          });
+        },
+      },
+    ],
+  },
+
+  {
+    element: 'input',
+    attributes: {
+      type: 'password',
+      name: 'confirmPass',
+      required: true,
+      disabled: true,
+      autocomplete: 'off',
+    },
+    options: [],
+    classes: ['col-sm-12', 'col-md-6'],
+   
+    label: 'Repeat Password',
   },
 
   // Checkbox

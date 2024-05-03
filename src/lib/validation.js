@@ -135,11 +135,15 @@ function validate(val, schema, errorPrefix = '', throwError = true) {
   const isValid = check(val);
 
   if (isValid !== true) {
-    let message = errorPrefix + isValid.map((o) => o.message).join('\n\t');
+    let message =
+      schema.value && schema.value.message
+        ? schema.value.message
+        : errorPrefix + isValid.map((o) => o.message).join('\n\t');
     if (throwError) {
       throw new Error(message);
     }
 
+    // console.log({ message });
     return message;
   } else {
     return null;
@@ -169,6 +173,7 @@ export function validateControl(control) {
     schema.props.attributes.props.name.optional = true;
     schema.props.content.optional = false;
   }
+
   // validate
   validate(control, schema, 'Control[' + control.idx + '] ');
   return schema;
@@ -247,7 +252,7 @@ export function validateValue(control) {
   }
 
   // if required
-  if (control.required) {
+  if (control.required && !control.attributes.disabled) {
     valueSchema.optional = false;
 
     if (

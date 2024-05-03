@@ -17,6 +17,10 @@
     text: label || control.label.text || control.label,
   });
 
+  // remove the for attribute if addad
+  if (label.attributes && label.attributes.for) {
+    delete label.attributes.for;
+  }
 </script>
 
 <label for={id || control.attributes.id} {...label.attributes} class={cls}>

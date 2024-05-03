@@ -5,7 +5,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-export let elementSchema = {
+export const elementSchema = {
     type: 'string',
     optional: true,
     default: 'input',
@@ -27,7 +27,7 @@ export let elementSchema = {
     ],
 };
 
-export let inputTypeSchema = {
+export const inputTypeSchema = {
     type: 'string',
     optional: true,
     default: 'text',
@@ -80,7 +80,7 @@ export const controlSchema = {
                 autocomplete: {
                     type: 'string',
                     optional: true,
-                    enum: ['on' | 'off'],
+                    enum: ['on' , 'off'],
                 },
                 form: { type: 'string', optional: true },
                 formaction: { type: 'string', optional: true },

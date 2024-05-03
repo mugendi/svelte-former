@@ -82,7 +82,7 @@
         onChangeObj = control.onChange[i];
 
         if (typeof onChangeObj.set == "function") {
-          await onChangeObj.set.bind(control)(control.attributes.value, update);
+          await onChangeObj.set.bind(control)(control.error, control.attributes.value, update);
         } else {
           update(onChangeObj.set);
         }
@@ -133,6 +133,8 @@
 
                 // validate
                 validateControl(newControl);
+
+                console.log(JSON.stringify(newControl,0,4));
                 // assign value
                 controls[i] = newControl;
                 currentControl.update((o) => controls[i]);
