@@ -5,7 +5,170 @@
  https://opensource.org/licenses/MIT
 -->
 
-# The Controls API
+# Type of Controls
+
+## Input
+```javascript
+  {
+    element: 'input',
+    // add any valid html input attributes
+    attributes: {
+      type:'text',
+      name: 'firstName',
+      // min, max, minlength & maxlength are automatically applied to validation
+      min: '4',
+      // notice the error until a valid value is added
+      required: true,
+    },
+    // bootstrap column classes to position inputs
+    classes: ['col-sm-12', 'col-md-6'],
+    // validation based on https://github.com/icebob/fastest-validator
+    validation: {
+      type: 'string',
+    },
+    // add label. HTML code can be used
+    label: '<i>First Name</i>',
+  }
+```
+
+## Radio Box
+```javascript
+  {
+    element: 'input',
+    attributes: {
+      type: 'radio',
+      name: 'gender',
+      // sometimes a field can be optional
+      required: true,
+    },
+    classes: ['col-sm-12', 'col-md-6'],
+    // labels can also be objects with relevant html attributes
+    label: {
+      text: 'Gender',
+      attributes: {
+        class: 'label',
+      },
+    },
+    // Radio Boxes must have an options Object
+    options: [
+      { text: 'Male', value: 'male' },
+      { text: 'Female', value: 'female' },
+    ],
+  },
+```
+
+## Check Box
+```javascript
+  {
+    element: 'input',
+    attributes: {
+      type: 'checkbox',
+      name: 'terms',
+      // sometimes a field can be optional
+      required: true,
+    },
+    classes: ['col-sm-12', 'col-md-6'],
+    // labels can also be strings
+    label: 'Accept Terms',
+  }
+```
+
+## Select
+```javascript
+ {
+    element: 'select',
+    attributes: {
+      name: 'country',
+      required: true,
+      // You can have a placeholder
+      placeholder: 'Select Country',
+    },
+    classes: ['col-sm-12', 'col-md-6'],
+    label: 'Country',
+    options: ['Kenya', 'Nigeria', 'Canada', 'Australia'],
+ }
+```
+
+## Autocomplete Control
+
+```javascript
+  {
+    element:"autocomplete",
+    options:["German Shepherd","Japanese Spitz", "Poodle", "Maltese", "Havanese"],
+    attributes:{
+      name:'dog-breed',
+      placeholder:"Enter Favourite Dog Breed"
+    },
+    label:"Dog Breed"
+  },
+```
+
+## Dynamic Control
+
+```javascript
+ // First password field
+ {
+    element: 'input',
+    attributes: {
+      type: 'password',
+      name: 'password',
+    },
+    classes: ['col-sm-12', 'col-md-6'],
+    validation: {
+      type: 'string',
+      // password should ne at least 6 characters
+      min: 6,
+      // check password strength. Regex from: https://stackoverflow.com/a/70924394/1462634
+      pattern:
+        /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*[\d|@#$!%*?&])[\p{L}\d@#$!%*?&]{6,}$/gmu,
+      // Custom error message
+      message:
+        ' <strong>Password too weak.</strong> Mix lowercase, uppercase, special characters and numbers',
+    },
+    label: 'Password',
+    onChange: [
+      {
+        set: function (error, value, update) {
+          // if error or no value
+          if (error || !value) {
+            return;
+          }
+          // update confirmPass control
+          update({
+            confirmPass: {
+              attributes: { disabled: false },
+              validation: {
+                // ensure passwords match
+                enum: [value],
+                // custom error message
+                message: 'Passwords do not match!',
+              },
+            },
+          });
+        },
+      },
+    ],
+  }
+  
+ // Dynamic field updated after password field is set
+  {
+    element: 'input',
+    attributes: {
+      type: 'password',
+      name: 'confirmPass',
+      required: true,
+      // start with a disabled field
+      disabled: true,
+      autocomplete: 'off',
+    },
+    options: [],
+    classes: ['col-sm-12', 'col-md-6'],
+    label: 'Repeat Password',
+  },
+```
+
+
+# The Controls Object (API)
 
 Controls/Form Inputs are created via an object with the following format:
 

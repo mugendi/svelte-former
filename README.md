@@ -7,6 +7,7 @@ This is a [svelte](https://svelte.dev/) from component that handles:
 - Form validation using [Fastest Validator](https://www.npmjs.com/package/fastest-validator)
 - Dynamic fields triggered by values in other fields
 - Rich text (WISIWYG) editor via [SunEditor](https://github.com/JiHong88/SunEditor)
+- Autocomplete controls with **fuzzy search** support
 
 Since svelte is the [Magical disappearing framework](https://v2.svelte.dev/) that compiles into framework-less vanilla JavaScript, this component can also be used with ordinary JavaScript.
 
