@@ -10,7 +10,6 @@
   "type": "module",
   "browser": "build/svelte-former.js",
   "main": "src/index.js",
-  "svelte": "index.js",
   
   "scripts": {
     "dev": "rollup -c -w",
