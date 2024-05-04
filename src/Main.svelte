@@ -125,7 +125,6 @@
                     attributes: {
                       id: controls[i].attributes.id,
                       name: controls[i].attributes.name,
-                      type: controls[i].attributes.type,
                     },
                     creationMethod: "dynamic",
                   }
