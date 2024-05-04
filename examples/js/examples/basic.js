@@ -81,12 +81,11 @@ let controls = [
     // Radio Boxes can also be an array of strings
     options: ['Some College', 'University'],
   },
-  
 
   {
-    element: "div",
-    content : "<h3>Dynamic Controls</h3>",
-    attributes: { value: "", class: "my-4" },
+    element: 'div',
+    content: '<h3>Dynamic Controls</h3>',
+    attributes: { value: '', class: 'my-4' },
   },
 
   // Dynamic Select Boxes
@@ -171,6 +170,18 @@ let controls = [
     options: [],
   },
 
+  { element: 'hr' },
+
+  {
+    element:"autocomplete",
+    options:["German Shepherd","Japanese Spitz", "Poodle", "Maltese", "Havanese"],
+    attributes:{
+      name:'dog-breed',
+      placeholder:"Enter Favourite Dog Breed"
+    },
+    label:"Dog Breed"
+  },
+
   // Even rich textboxes are allowed
   {
     element: 'richtext',
@@ -187,8 +198,6 @@ let controls = [
       min: 20,
     },
   },
-
-  
 
   {
     element: 'input',
@@ -229,7 +238,6 @@ let controls = [
               },
             },
           });
-
         },
       },
     ],
