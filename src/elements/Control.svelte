@@ -41,7 +41,7 @@
     clearTimeout(timeoutInt);
 
     timeoutInt = setTimeout(() => {
-      // console.log({e, val, element});
+      // console.log({ e, val, element });
       if (e) {
         let el = e.target;
         element = el.tagName.toLowerCase();
@@ -58,6 +58,8 @@
         value = val;
       }
 
+      // console.log({ type, value });
+
       control.attributes.value = value;
       validateValue(control);
       currentControl.update((o) => control);
@@ -72,8 +74,9 @@
 
       //
       Errors.update((o) => errors);
-    }, 250);
+    }, 0);
   }
+
 
   // run onChange if there is a value passed on creation
   onMount(function () {
@@ -87,9 +90,14 @@
 </script>
 
 <div
-  class="{control.classes.join(' ')} {control.attributes.type == 'hidden' ? 'svelte-former-hidden' : ''}"
+  class="{control.classes.join(' ')} {control.attributes.type == 'hidden'
+    ? 'svelte-former-hidden'
+    : ''}"
 >
-  <div class="svlete-former-control-group{control.error ? ' svelte-former-has-error' : ''} {type || ' content'} ">
+  <div
+    class="svlete-former-control-group{control.error ? ' svelte-former-has-error' : ''} {type ||
+      ' content'} "
+  >
     {#if control.element == "input"}
       <Input bind:control {onChange} />
     {:else if control.element == "select"}
