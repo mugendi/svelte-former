@@ -15,6 +15,7 @@ export const elementSchema = {
     'textarea',
     'select',
     'richtext',
+    'autocomplete',
     'div',
     'hr',
     'br',
@@ -71,7 +72,7 @@ export const controlSchema = {
       default: {},
       // https://www.dofactory.com/html/input-attributes
       props: {
-        name: { type: 'string' },
+        name: { type: 'string' , optional:true},
         type: inputTypeSchema,
         value: { type: 'any', optional: true },
         id: { type: 'string', optional: true },

@@ -77,7 +77,7 @@
       let setValue;
 
       // control.onChangeResets = control.onChangeResets || {};
-      
+
       for (let i in control.onChange) {
         onChangeObj = control.onChange[i];
 
@@ -134,15 +134,18 @@
                 validateControl(newControl);
 
                 // console.log(JSON.stringify(newControl,0,4));
+                console.log(newControl.attributes.name, newControl.attributes.value);
                 // assign value
                 controls[i] = newControl;
-                currentControl.update((o) => controls[i]);
+
+                setTimeout(() => {
+                  currentControl.update((o) => controls[i]);
+                }, 1);
               }
             }
           }
         }
       }
-
     } catch (error) {
       throw error;
     }
@@ -152,11 +155,15 @@
     return Object.keys($Errors).length > 0;
   }
 
-  onMount(function () {
+  onMount(async function () {
     validateControls(controls);
     isReady = true;
   });
+
+
 </script>
+
+
 
 {#if isReady}
   <div class="former">

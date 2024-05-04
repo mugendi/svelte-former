@@ -195,38 +195,41 @@ export function validateControls(controls) {
       continue;
     }
 
-    // ensure unique names
-    if (control.attributes.name in inputNames) {
-      throw new Error(
-        'Control[' +
-          (i + 1) +
-          '] attributes.name "' +
-          control.attributes.name +
-          '" has already been used with Control[' +
-          (inputNames[control.attributes.name] + 1) +
-          ']'
-      );
-    }
+    // console.log(JSON.stringify(formInputTypes, 0, 4));
+    if (formInputTypes.indexOf(controls[i].element) > -1) {
+      // ensure unique names
+      if (control.attributes.name in inputNames) {
+        throw new Error(
+          'Control[' +
+            (i + 1) +
+            '] attributes.name "' +
+            control.attributes.name +
+            '" has already been used with Control[' +
+            (inputNames[control.attributes.name] + 1) +
+            ']'
+        );
+      }
 
-    inputNames[control.attributes.name] = i;
+      inputNames[control.attributes.name] = i;
 
-    if ('id' in control.attributes && control.attributes.id in inputIds) {
-      throw new Error(
-        'Control[' +
-          (i + 1) +
-          '] attributes.id "' +
-          control.attributes.id +
-          '" has already been used with Control[' +
-          (inputIds[control.attributes.id] + 1) +
-          ']'
-      );
-    }
+      if ('id' in control.attributes && control.attributes.id in inputIds) {
+        throw new Error(
+          'Control[' +
+            (i + 1) +
+            '] attributes.id "' +
+            control.attributes.id +
+            '" has already been used with Control[' +
+            (inputIds[control.attributes.id] + 1) +
+            ']'
+        );
+      }
 
-    inputIds[control.attributes.id] = i;
+      inputIds[control.attributes.id] = i;
 
-    // add id attribute if missing
-    if ('id' in control.attributes === false) {
-      control.attributes.id = 'control-' + control.element + '-' + (i + 1);
+      // add id attribute if missing
+      if ('id' in control.attributes === false) {
+        control.attributes.id = 'control-' + control.element + '-' + (i + 1);
+      }
     }
   }
 
@@ -289,7 +292,6 @@ export function validateValue(control) {
   };
 
   let d = {};
-
 
   // validate
   let obj = {

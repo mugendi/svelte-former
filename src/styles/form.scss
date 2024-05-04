@@ -20,6 +20,7 @@
     border-radius: 10px;
     border: 1px solid #fafafa;
     margin: 5px 0;
+    position: relative;
 
     .label-container {
       display: flex;
@@ -106,7 +107,7 @@
       }
 
       &:placeholder-shown {
-        color: #999 ;
+        color: #999;
       }
 
       &:not(:placeholder-shown) {
@@ -127,12 +128,41 @@
       background-repeat: no-repeat;
       background-position: right 0.5rem center;
 
-
-      &:has(option[value=""]:checked) {
+      &:has(option[value='']:checked) {
         color: #999;
       }
     }
 
+    .svelte-former-autocomplete {
+      position: absolute;
+      background: white;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      
+      width: calc(100% - 16px);
+      height: auto;
+      z-index: 9999;
+      margin: 1px 3px 0;
+
+      ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none;
+
+        li {
+          padding: 5px 10px;
+          color: #444;
+          cursor: pointer;
+          text-wrap: wrap;
+
+          & + li{
+            border-top: 1px solid #eee;
+          }
+          
+        }
+      }
+    }
   }
 
   /* CSS */

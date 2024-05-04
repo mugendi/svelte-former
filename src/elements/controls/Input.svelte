@@ -6,6 +6,7 @@
 -->
 
 <script>
+  // import { currentControl } from "../../lib/store";
   import Error from "../Error.svelte";
   import Label from "../Label.svelte";
 
@@ -25,14 +26,13 @@
     }
   }
 
-  //   $: console.log(JSON.stringify(control, 0, 4));
 </script>
 
 <!-- Radio Boxes -->
 {#if type == "radio"}
   <div class="label-container">
     <div>
-      <Label bind:control cls="svelte-former-label pad-left"/>
+      <Label bind:control cls="svelte-former-label pad-left" />
 
       <div class="radio-control" bind:this={control.node}>
         {#each control.options as option, i}
@@ -61,6 +61,7 @@
 
   <!-- Check Boxes -->
 {:else if type == "checkbox"}
+
   <div class="label-container">
     <div class="checkbox-control">
       <input
@@ -94,3 +95,4 @@
     bind:this={control.node}
   />
 {/if}
+

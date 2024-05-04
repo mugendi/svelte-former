@@ -14,6 +14,7 @@
   import { formInputTypes } from "../lib/utils";
   import { Errors, currentControl } from "../lib/store";
   import RichText from "./controls/RichText.svelte";
+  import AutoComplete from "./controls/AutoComplete.svelte";
 
   export let control;
 
@@ -62,6 +63,7 @@
 
       control.attributes.value = value;
       validateValue(control);
+
       currentControl.update((o) => control);
 
       let errors = Object.assign({}, $Errors);
@@ -77,7 +79,6 @@
     }, 0);
   }
 
-
   // run onChange if there is a value passed on creation
   onMount(function () {
     // if (control.attributes && ("value" in control.attributes || control.attributes.required)) {
@@ -87,6 +88,7 @@
     }, 1);
     // }
   });
+
 </script>
 
 <div
@@ -106,6 +108,8 @@
       <Textarea bind:control {onChange} />
     {:else if control.element == "richtext"}
       <RichText bind:control {onChange} />
+    {:else if control.element == "autocomplete"}
+      <AutoComplete bind:control {onChange} />
     {:else}
       <svelte:element this={control.element} bind:this={control.node} {...control.attributes}>
         {@html control.content}
