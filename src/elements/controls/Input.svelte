@@ -8,6 +8,7 @@
 <script>
   // import { currentControl } from "../../lib/store";
   import Error from "../Error.svelte";
+  import Icons from "../Icons.svelte";
   import Label from "../Label.svelte";
 
   export let control;
@@ -15,6 +16,13 @@
 
   let type;
   let optionValue;
+
+  function toggleHidden(e) {
+    // console.log(e);
+    control.showHidden = !control.showHidden;
+
+    //
+  }
 
   $: {
     type = control.attributes.type;
@@ -25,7 +33,6 @@
       delete control.attributes.required;
     }
   }
-
 </script>
 
 <!-- Radio Boxes -->
@@ -61,7 +68,6 @@
 
   <!-- Check Boxes -->
 {:else if type == "checkbox"}
-
   <div class="label-container">
     <div class="checkbox-control">
       <input
@@ -83,6 +89,28 @@
     on:keyup={onChange}
     bind:this={control.node}
   />
+{:else if type == "password"}
+  <div class="label-container">
+    <Label bind:control />
+    <Error bind:control />
+  </div>
+  <input
+    {...control.attributes}
+    on:change={onChange}
+    on:keyup={onChange}
+    bind:this={control.node}
+    type={control.showHidden ? "text" : "password"}
+  />
+
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <span
+    class="svelte-former-icon"
+    title={control.showHidden ? "Hide" : "Show"}
+    on:click={toggleHidden}
+  >
+    <Icons icon={control.showHidden ? "eyeClosed" : "eyeOpen"} />
+  </span>
 {:else}
   <div class="label-container">
     <Label bind:control />
@@ -95,4 +123,3 @@
     bind:this={control.node}
   />
 {/if}
-

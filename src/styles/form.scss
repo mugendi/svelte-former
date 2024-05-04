@@ -81,6 +81,14 @@
       }
     }
 
+    .svelte-former-icon {
+      position: absolute;
+      right: 10px;
+      bottom: 2px;
+      svg {
+        width: 20px;
+      }
+    }
     textarea {
       min-height: 200px;
     }
@@ -139,7 +147,7 @@
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
-      
+
       width: calc(100% - 16px);
       height: auto;
       z-index: 9999;
@@ -156,10 +164,9 @@
           cursor: pointer;
           text-wrap: wrap;
 
-          & + li{
+          & + li {
             border-top: 1px solid #eee;
           }
-          
         }
       }
     }
