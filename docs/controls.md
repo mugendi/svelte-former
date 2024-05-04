@@ -168,6 +168,6 @@ This parameter is used to change other fields dynamically. It is triggered whene
 
 ```
 
-Note: All attributes of another control other than `'element', 'name' and 'type'` can be updated dynamically.
+Note: All attributes of another control other than `'element' and 'name'` can be updated dynamically.
 
 See [example](https://mugendi.github.io/docs/svelte-former/) for advanced usage.

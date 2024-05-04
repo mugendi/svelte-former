@@ -40,7 +40,7 @@ Each form control is an object with the following properties `element, attribute
     let controls = [...];
 
     // initialize form
-    let s = new SvelteFormer({
+    let s = new SvelteFormer.Former({
       // target element
       target: document.getElementById('form'),
       // props

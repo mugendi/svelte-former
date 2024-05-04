@@ -6,4 +6,4 @@
  */
 
 
-export { default  } from './Main.svelte';
+export { default as Former  } from './Main.svelte';

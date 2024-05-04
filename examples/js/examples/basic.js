@@ -301,7 +301,7 @@ let buttons = [
   },
 ];
 
-let s = new SvelteFormer({
+let s = new SvelteFormer.Former({
   target: document.getElementById('form'),
   onSubmit: function (e) {
     console.log(e);
