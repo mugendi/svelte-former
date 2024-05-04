@@ -288,8 +288,16 @@ export function validateValue(control) {
     value: valueSchema,
   };
 
+  let d = {};
+
+
   // validate
-  let obj = { value: control.attributes.value || undefined };
+  let obj = {
+    value:
+      typeof control.attributes.value == 'undefined'
+        ? undefined
+        : control.attributes.value,
+  };
   let error = validate(obj, schema, '', false);
 
   control.attributes.value = obj.value;
