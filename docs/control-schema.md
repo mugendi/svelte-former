@@ -10,7 +10,8 @@
 Form control objects are validated against the following schema:
 
 ```javascript
-const elementSchema = {
+
+export const elementSchema = {
   type: 'string',
   optional: true,
   default: 'input',
@@ -20,6 +21,7 @@ const elementSchema = {
     'textarea',
     'select',
     'richtext',
+    'autocomplete',
     'div',
     'hr',
     'br',
@@ -32,7 +34,7 @@ const elementSchema = {
   ],
 };
 
-const inputTypeSchema = {
+export const inputTypeSchema = {
   type: 'string',
   optional: true,
   default: 'text',
@@ -63,17 +65,20 @@ const inputTypeSchema = {
   ],
 };
 
-const controlSchema = {
+export const controlSchema = {
   $$root: true,
+  //   $$strict: 'remove',
 
   type: 'object',
   props: {
     element: elementSchema,
     attributes: {
       type: 'object',
+      optional: true,
+      default: {},
       // https://www.dofactory.com/html/input-attributes
       props: {
-        name: { type: 'string' },
+        name: { type: 'string' , optional:true},
         type: inputTypeSchema,
         value: { type: 'any', optional: true },
         id: { type: 'string', optional: true },
@@ -85,6 +90,7 @@ const controlSchema = {
           type: 'string',
           optional: true,
           enum: ['on', 'off'],
+          default: 'off',
         },
         form: { type: 'string', optional: true },
         formaction: { type: 'string', optional: true },
@@ -104,6 +110,7 @@ const controlSchema = {
         hidden: { type: 'boolean', optional: true, convert: true },
         autofocus: { type: 'boolean', optional: true, convert: true },
         multiple: { type: 'boolean', optional: true, convert: true },
+
         tabindex: { type: 'number', optional: true, convert: true },
         maxlength: { type: 'number', optional: true, convert: true },
         size: { type: 'number', optional: true, convert: true },
@@ -137,6 +144,7 @@ const controlSchema = {
     validation: {
       type: 'object',
       optional: true,
+
       props: {
         enum: {
           type: 'array',
@@ -192,7 +200,7 @@ const controlSchema = {
       },
     },
     // checked: { type: 'boolean', optional: true },
-    content: { type: 'string', optional: true },
+    content: { type: 'string', optional: true, default: '' },
     classes: {
       type: 'array',
       default: ['col-sm-12'],
@@ -225,4 +233,5 @@ const controlSchema = {
     },
   },
 };
+
 ```
