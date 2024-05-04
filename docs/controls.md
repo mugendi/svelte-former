@@ -192,7 +192,7 @@ To ensure you enter a correctly formatted object, all controls are validated aga
 
 ## `element`
 
-Determines the typr of form element to be created. Should be one of : `'input', 'textarea', 'select', 'richtext', 'div', 'hr', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'`.
+Determines the typr of form element to be created. Should be one of : `'input', 'textarea', 'select', 'richtext', 'autocomplete', 'div', 'hr', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'`.
 
 ## `attributes`
 
