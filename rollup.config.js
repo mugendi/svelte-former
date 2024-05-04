@@ -18,7 +18,7 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
   // This `main.js` file we wrote
-  input: 'src/index.js',
+  input: 'index.js',
   output: {
     // The destination for our bundled JavaScript
     file: production ? 'build/svelte-former.min.js' : 'build/svelte-former.js',
