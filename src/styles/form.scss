@@ -81,10 +81,17 @@
       }
     }
 
+    &.type-password {
+      // position: relative;
+      .svelte-former-error {
+        margin-right: 30px;
+      }
+    }
+
     .svelte-former-icon {
       position: absolute;
-      right: 10px;
-      bottom: 2px;
+      right: 5px;
+      top: 5px;
       svg {
         width: 20px;
       }
