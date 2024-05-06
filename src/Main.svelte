@@ -134,7 +134,7 @@
                 validateControl(newControl);
 
                 // console.log(JSON.stringify(newControl,0,4));
-                console.log(newControl.attributes.name, newControl.attributes.value);
+                // console.log(newControl.attributes.name, newControl.attributes.value);
                 // assign value
                 controls[i] = newControl;
 
