@@ -184,7 +184,7 @@
     if (showSuccess) {
       cookieStore.remove(formId);
     }
-    console.log({ formId });
+    // console.log({ formId });
   }
 
   onMount(async function () {
