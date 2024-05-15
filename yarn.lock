@@ -2653,6 +2653,11 @@ shell-quote@^1.6.1:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.8.1.tgz#6dbf4db75515ad5bac63b4f1894c3a154c766680"
   integrity sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==
 
+shorthash@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/shorthash/-/shorthash-0.0.2.tgz#59b268eecbde59038b30da202bcfbddeb2c4a4eb"
+  integrity sha512-L/QRElsfTaCCzA7AJPXuin6/jgWjgmTfjdaXucQ5PauPypmqAZ7t4GueaCv+Jti0M8S2Iv1C/ryD+aWY/KUGCA==
+
 side-channel@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/side-channel/-/side-channel-1.0.6.tgz#abd25fb7cd24baf45466406b1096b7831c9215f2"
