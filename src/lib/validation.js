@@ -130,7 +130,7 @@ export const validationTypes = {
   // week: "",
 };
 
-function validate(val, schema, errorPrefix = '', throwError = true) {
+export function validate(val, schema, errorPrefix = '', throwError = true) {
   const check = v.compile(schema);
   const isValid = check(val);
 

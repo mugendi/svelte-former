@@ -5,6 +5,9 @@
  * https://opensource.org/licenses/MIT
  */
 
+const colorRegex =
+  /(#(?:[0-9a-f]{2}){2,4}|#[0-9a-f]{3}|(?:rgba?|hsla?)\((?:\d+%?(?:deg|rad|grad|turn)?(?:,|\s)+){2,3}[\s\/]*[\d\.]+%?\))/i;
+
 export const elementSchema = {
   type: 'string',
   optional: true,
@@ -72,7 +75,7 @@ export const controlSchema = {
       default: {},
       // https://www.dofactory.com/html/input-attributes
       props: {
-        name: { type: 'string' , optional:true},
+        name: { type: 'string', optional: true },
         type: inputTypeSchema,
         value: { type: 'any', optional: true },
         id: { type: 'string', optional: true },
@@ -224,6 +227,36 @@ export const controlSchema = {
       type: 'string',
       optional: true,
       default: 'normal',
+    },
+  },
+};
+
+export const successMessageSchema = {
+  successMessage: {
+    type: 'object',
+    props: {
+      title: 'string',
+      text: 'string',
+      style: {
+        type: 'object',
+        optional: true,
+        default: {
+          bgColor: '#bde1ee',
+          textColor: '#000',
+        },
+        props: {
+          bgColor: {
+            type: 'string',
+            pattern: colorRegex,
+            default: '#bde1ee',
+          },
+          textColor: {
+            type: 'string',
+            pattern: colorRegex,
+            default: '#000',
+          },
+        },
+      },
     },
   },
 };

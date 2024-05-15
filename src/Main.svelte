@@ -8,25 +8,37 @@
 <script>
   import "./styles/bootstrap-grid.scss";
   import "./styles/form.scss";
-
+  import Buttons from "./elements/Buttons.svelte";
   import Control from "./elements/Control.svelte";
   import { validateControl, validateControls } from "./lib/validation.js";
   import { Errors, Values, currentControl } from "./lib/store";
   import { onMount } from "svelte";
   import { merge } from "./lib/merge";
-  import Buttons from "./elements/Buttons.svelte";
+  import { unique } from "shorthash";
+  // manage form cookies
+  import cookieStore from "./lib/cookieStore";
+  import SuccessMessage from "./elements/SuccessMessage.svelte";
 
   export let controls = [];
   export let method = "POST";
   export let action = "";
   export let failOnError = true;
-  export let onSubmit = function onSubmit(e) {
-    if (failOnError && hasErrors()) {
-      e.preventDefault();
-    }
-  };
+
+  export let onSubmit;
 
   export let buttons = [];
+  export let layout = "vertical";
+
+  export let successMessage = {
+    title: "Submission Successful",
+    text: "You have successfully submitted the form.",
+  };
+
+  let formId = unique(window.location);
+  let showSuccess = false;
+  let formerEl;
+
+  // console.log({ showSuccess , successMessage});
 
   let isReady = false;
   let values = {};
@@ -155,30 +167,55 @@
     return Object.keys($Errors).length > 0;
   }
 
+  function submitForm(e) {
+    if (failOnError && hasErrors()) {
+      e.preventDefault();
+    }
+
+    cookieStore.set(formId, true);
+
+    if (typeof onSubmit == "function") {
+      onSubmit(e);
+    }
+  }
+
+  $: if (formId) {
+    showSuccess = cookieStore.get(formId);
+    if (showSuccess) {
+      cookieStore.remove(formId);
+    }
+    console.log({ formId });
+  }
+
   onMount(async function () {
     validateControls(controls);
     isReady = true;
+
+    setTimeout(() => {
+      formId = unique(window.location.href) + "-" + unique(formerEl.innerHTML);
+    }, 1);
   });
-
-
 </script>
 
-
-
 {#if isReady}
-  <div class="former">
-    <form class="container-fluid" on:submit={onSubmit} {action} {method} bind:this={formEl}>
-      <div class="row">
-        {#each controls as control, i}
-          <Control bind:control idx={i + 1} />
-        {/each}
-      </div>
-
-      <div class="row">
-        <div class="svlete-former-control-buttons">
-          <Buttons {buttons} {formEl} />
+  <div class="former" bind:this={formerEl} id={formId}>
+    {#if showSuccess}
+      <SuccessMessage {successMessage} />
+    {:else}
+      <form class="container-fluid" on:submit={submitForm} {action} {method} bind:this={formEl}>
+        <div class="{layout} {layout == 'horizontal' ? 'row' : ''}">
+          <div class={layout !== "horizontal" ? "row" : "col"}>
+            {#each controls as control, i}
+              <Control bind:control idx={i + 1} />
+            {/each}
+          </div>
+          <div class={layout !== "horizontal" ? "row" : "col-auto"}>
+            <div class="svlete-former-control-buttons">
+              <Buttons {buttons} {formEl} />
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    {/if}
   </div>
 {/if}

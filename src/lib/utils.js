@@ -6,7 +6,13 @@
  */
 import pTimeout from './p-timeout';
 
-export let formInputTypes = ['input', 'select', 'textarea', 'richtext', 'autocomplete'];
+export let formInputTypes = [
+  'input',
+  'select',
+  'textarea',
+  'richtext',
+  'autocomplete',
+];
 
 const magicSplit =
   /^[a-zà-öø-ÿ]+|[A-ZÀ-ÖØ-ß][a-zà-öø-ÿ]+|[a-zà-öø-ÿ]+|[0-9]+|[A-ZÀ-ÖØ-ß]+(?![a-zà-öø-ÿ])/g;
@@ -62,7 +68,7 @@ async function _waitForAll(waitFor) {
   }
 }
 
-function arrify(v) {
+export function arrify(v) {
   if (v === undefined) return [];
   return Array.isArray(v) ? v : [v];
 }
@@ -70,3 +76,30 @@ function arrify(v) {
 function delay(time = 1000) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
+
+export function joinClasses(obj) {
+  return arrify(obj.classes).join(' ');
+}
+
+export function addParam(url, key, val) {
+  let urlObj = new URL(toAbsoluteURL(url));
+  let params = new URLSearchParams(urlObj.search);
+  params.append(key, val);
+
+  urlObj.search = params.toString();
+
+  return urlObj.toString();
+}
+
+export function toAbsoluteURL(url) {
+  let urlObj;
+
+  if (/https?:\/\//.test(url) == false) {
+    urlObj = new URL(window.location.href);
+  } else {
+    urlObj = new URL(url);
+  }
+
+  return urlObj.toString();
+}
+

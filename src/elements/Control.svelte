@@ -11,7 +11,7 @@
   import Input from "./controls/Input.svelte";
   import Select from "./controls/Select.svelte";
   import Textarea from "./controls/Textarea.svelte";
-  import { formInputTypes } from "../lib/utils";
+  import { formInputTypes, joinClasses } from "../lib/utils";
   import { Errors, currentControl } from "../lib/store";
   import RichText from "./controls/RichText.svelte";
   import AutoComplete from "./controls/AutoComplete.svelte";
@@ -92,7 +92,7 @@
 </script>
 
 <div
-  class="{control.classes.join(' ')} {control.attributes.type == 'hidden'
+  class="{joinClasses(control)} {control.attributes.type == 'hidden'
     ? 'svelte-former-hidden'
     : ''}"
 >

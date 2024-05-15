@@ -13,9 +13,14 @@
   export let label;
   export let cls = "svelte-former-label";
 
-  label = merge(typeof control.label == "object" ? control.label : {}, {
-    text: label || control.label.text || control.label,
-  });
+  label = merge(
+    {
+      text: typeof control.label == "object" ? control.label : null,
+      attributes: {},
+    },
+    control.label || {}
+  );
+
 
   // remove the for attribute if addad
   if (label.attributes && label.attributes.for) {
@@ -23,6 +28,8 @@
   }
 </script>
 
-<label for={id || control.attributes.id} {...label.attributes} class={cls}>
-  {@html label.text || label}
-</label>
+{#if label.text}
+  <label for={id || control.attributes.id} {...label.attributes} class={cls}>
+    {@html label.text}
+  </label>
+{/if}
