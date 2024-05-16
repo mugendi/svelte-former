@@ -22,10 +22,6 @@
     control.label || {}
   );
 
-  console.log(control);
-  console.log(label);
-
-
   // remove the for attribute if addad
   if (label.attributes && label.attributes.for) {
     delete label.attributes.for;
