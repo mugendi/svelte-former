@@ -6,8 +6,6 @@
  */
 
 .former {
-
-
   form {
     .svlete-former-control-buttons {
       padding: 10px;
@@ -78,8 +76,10 @@
           .svelte-former-error {
             font-size: 0.7rem;
             text-wrap: wrap;
-            border-left: 1px #caa solid;
+          }
+          label + .svelte-former-error {
             padding-left: 5px;
+            border-left: 1px #caa solid;
           }
         }
       }

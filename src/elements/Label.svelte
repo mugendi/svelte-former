@@ -13,13 +13,17 @@
   export let label;
   export let cls = "svelte-former-label";
 
+
   label = merge(
     {
-      text: typeof control.label == "object" ? control.label : null,
+      text: typeof control.label == "object" ? control.label.text : control.label || null,
       attributes: {},
     },
     control.label || {}
   );
+
+  console.log(control);
+  console.log(label);
 
 
   // remove the for attribute if addad
