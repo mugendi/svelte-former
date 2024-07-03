@@ -10,6 +10,9 @@
   import { Errors, Values } from "../lib/store";
   export let buttons = [{ text: "Submit" }];
   export let formEl;
+  // export let controls;
+  // export let values;
+  // export let errors;
 
   // format buttons
   buttons = buttons.map((o) => {
@@ -23,7 +26,7 @@
         form: formEl,
         errors: $Errors,
         values: $Values,
-        controls: controls,
+        // controls: controls,
       });
     }
   }

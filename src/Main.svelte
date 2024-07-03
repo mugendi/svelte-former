@@ -199,7 +199,7 @@
 
 {#if isReady}
   <div class="former" bind:this={formerEl} id={formId}>
-    {#if showSuccess}
+    {#if showSuccess && !onSubmit}
       <SuccessMessage {successMessage} />
     {:else}
       <form class="container-fluid" on:submit={submitForm} {action} {method} bind:this={formEl}>
