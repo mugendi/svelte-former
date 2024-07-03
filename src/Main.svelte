@@ -175,7 +175,7 @@
     cookieStore.set(formId, true);
 
     if (typeof onSubmit == "function") {
-      onSubmit(e);
+      onSubmit(e, values);
     }
   }
 
