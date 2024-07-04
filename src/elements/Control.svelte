@@ -88,13 +88,10 @@
     }, 1);
     // }
   });
-
 </script>
 
 <div
-  class="{joinClasses(control)} {control.attributes.type == 'hidden'
-    ? 'svelte-former-hidden'
-    : ''}"
+  class="{joinClasses(control)} {control.attributes.type == 'hidden' ? 'svelte-former-hidden' : ''}"
 >
   <div
     class="svlete-former-control-group{control.error ? ' svelte-former-has-error' : ''} {type ||
@@ -112,7 +109,7 @@
       <AutoComplete bind:control {onChange} />
     {:else}
       <svelte:element this={control.element} bind:this={control.node} {...control.attributes}>
-        {@html control.content}
+        {@html control.content || ""}
       </svelte:element>
     {/if}
   </div>
